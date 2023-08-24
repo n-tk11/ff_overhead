@@ -1,0 +1,961 @@
+[ff.run] (0.002s) Waiting to acquire file lock at /var/tmp/fastfreeze/run/lock
+[ff.run] (0.002s) + criu check
+[ff.run] (0.032s) Preparing image store
+[ff.run] (0.033s) Fetching image manifest for file:///tmp/ff-test
+[ff.run] (0.034s) + pv -q "/tmp/ff-test/manifest.json"
+[ff.run] (0.037s) Image manifest found: version=2021-03-22, num_shards=4 compression=lz4 encryption=none prefix=zMpFQM
+[ff.run] (0.037s) Restoring application
+[ff.run] (0.038s) + criu-image-streamer --progress-fd 8 --ext-file-fds fs.tar:10 --shard-fds 11,13,15,17 --images-dir /var/tmp/fastfreeze/run serve
+[ff.run] (0.039s) + pv -q "/tmp/ff-test/zMpFQM-1.ffs" | lz4 -d - -
+[ff.run] (0.040s) + pv -q "/tmp/ff-test/zMpFQM-2.ffs" | lz4 -d - -
+[ff.run] (0.041s) + pv -q "/tmp/ff-test/zMpFQM-3.ffs" | lz4 -d - -
+[ff.run] (0.047s) + pv -q "/tmp/ff-test/zMpFQM-4.ffs" | lz4 -d - -
+[ff.run] (0.047s) Restoring filesystem
+[ff.run] (0.057s) + tar --verbose --directory / --extract --preserve-permissions --no-overwrite-dir --file -
+var/tmp/fastfreeze/
+var/tmp/fastfreeze/ld-inject.env
+var/tmp/fastfreeze/virttime-conf.bin
+var/tmp/fastfreeze/app-config.json
+var/tmp/fastfreeze/logs/
+var/tmp/fastfreeze/logs/ff-20230824-045638-checkpoint-zMpFQM.log
+var/tmp/fastfreeze/logs/ff-20230824-045627-run-OKbQDk.log
+[ff.run] (0.100s) Filesystem restored
+[ff.run] (0.101s) + set_ns_last_pid 900
+set_ns_last_pid: WARN: /proc/sys/kernel/pid_max is high. This might take a while
+[ff.run] (0.134s) Application inherits tty[8800:44] via fd:[0, 1, 2]
+[ff.run] (0.135s) Duration between restore and checkpoint: 15.3s
+[ff.run] (0.135s) Application clock: 11.6s
+[ff.run] (0.136s) Starting set_ns_last_pid server
+[ff.run] (0.138s) + set_ns_last_pid /var/tmp/fastfreeze/run/set_ns_last_pid.sock
+set_ns_last_pid: WARN: /proc/sys/kernel/pid_max is high. This might take a while
+[ff.run] (0.238s) Continuing reading image in memory...
+[ff.run] (0.497s) Uncompressed image size is 257 MiB, rate: 563 MiB/s
+[ff.run] (0.497s)   Shard 1: 68 MiB, rate: 149 MiB/s
+[ff.run] (0.498s)   Shard 2: 64 MiB, rate: 139 MiB/s
+[ff.run] (0.499s)   Shard 3: 63 MiB, rate: 139 MiB/s
+[ff.run] (0.499s)   Shard 4: 62 MiB, rate: 136 MiB/s
+[ff.run] (0.499s) Restoring processes
+[ff.run] (0.499s) + criu restore --restore-sibling --restore-detached --tcp-close --ext-unix-sk --images-dir /var/tmp/fastfreeze/run --cpu-cap --shell-job --file-locks --file-validation filesize --stream -v --display-stats --inherit-fd fd[0]:tty[8800:44]
+[ff.run] (0.501s) criu> (00.000000) Will drop all TCP connections on restore
+[ff.run] (0.501s) criu> (00.000078) Version: 3.15 (gitid 0)
+[ff.run] (0.501s) criu> (00.000417) Running on f1851f438630 Linux 6.2.0-26-generic #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2 x86_64
+[ff.run] (0.502s) criu> (00.000524) sockets: Probing sock diag modules
+[ff.run] (0.502s) criu> (00.000985) sockets: Done probing
+[ff.run] (0.502s) criu> (00.001273) Pagemap provides flags only
+[ff.run] (0.503s) criu> (00.001969) Found anon-shmem device at 1
+[ff.run] (0.503s) criu> (00.002087) Reset 906's dirty tracking
+[ff.run] (0.503s) criu> (00.002360) Dirty tracking support is OFF
+[ff.run] (0.503s) criu> (00.002453) Zero page detection failed, optimization turns off.
+[ff.run] (0.506s) criu> (00.005313) uffd: Lazy pages are not available: Operation not permitted
+[ff.run] (0.506s) criu> (00.005387) Lazy pages are not permited
+[ff.run] (0.513s) criu> (00.012177) File tty[8800:44] will be restored from inherit fd 0
+[ff.run] (0.514s) criu> (00.012767) Reading image tree
+[ff.run] (0.514s) criu> (00.013152) Add mnt ns 6 pid 1000
+[ff.run] (0.514s) criu> (00.013234) Add net ns 2 pid 1000
+[ff.run] (0.514s) criu> (00.013358) Add pid ns 1 pid 1000
+[ff.run] (0.515s) criu> (00.013942) Will restore in 0 namespaces
+[ff.run] (0.515s) criu> (00.014070) Collecting 51/56 (flags 3)
+[ff.run] (0.515s) criu> (00.014567) No memfd.img image
+[ff.run] (0.516s) criu> (00.014646) Collecting 40/54 (flags 2)
+[ff.run] (0.516s) criu> (00.015193) Collected [usr/bin/dash] ID 0x1
+[ff.run] (0.516s) criu> (00.015264) Collected [var/tmp/fastfreeze/virttime-conf.bin] ID 0x2
+[ff.run] (0.516s) criu> (00.015464) Collected [usr/lib/x86_64-linux-gnu/libpthread-2.31.so] ID 0x3
+[ff.run] (0.517s) criu> (00.015913) Collected [usr/lib/x86_64-linux-gnu/libdl-2.31.so] ID 0x4
+[ff.run] (0.517s) criu> (00.016135) Collected [usr/lib/x86_64-linux-gnu/libc-2.31.so] ID 0x5
+[ff.run] (0.517s) criu> (00.016364) Collected [var/tmp/fastfreeze/run/libvirttime.so] ID 0x6
+[ff.run] (0.517s) criu> (00.016423) Collected [var/tmp/fastfreeze/run/ld-linux-x86-64.so.2] ID 0x7
+[ff.run] (0.518s) criu> (00.016626) Collected [var/tmp/fastfreeze/run/ld-virtcpuid.so] ID 0x8
+[ff.run] (0.518s) criu> (00.016751) Collected [dev/pts/0] ID 0xa
+[ff.run] (0.518s) criu> (00.017022) Collected [opt/memoryhog/entrypoint.sh] ID 0xb
+[ff.run] (0.518s) criu> (00.017300) Collected [.] ID 0xc
+[ff.run] (0.519s) criu> (00.017618) Collected [opt/memoryhog/memoryhog] ID 0xd
+[ff.run] (0.519s) criu> (00.017700) Collected [dev/null] ID 0xe
+[ff.run] (0.519s) criu> (00.018264) Collected [dev/null] ID 0xf
+[ff.run] (0.519s) criu> (00.018361) Collecting 46/68 (flags 0)
+[ff.run] (0.519s) criu> (00.018433) No remap-fpath.img image
+[ff.run] (0.519s) criu> (00.018515) tty: Standard stream is not a terminal, may fail later
+[ff.run] (0.520s) criu> (00.019142) No apparmor.img image
+[ff.run] (0.520s) criu> (00.019244) No cgroup.img image
+[ff.run] (0.521s) criu> (00.019813) No pidns-1.img image
+[ff.run] (0.521s) criu> (00.019886) MYCOMMENT: Start fork_with_pid for pid 1000
+[ff.run] (0.521s) criu> (00.020363) Forking task with 1000 pid (flags 0x8000)
+[ff.run] (0.525s) criu> (00.023855) MYCOMMENT: From fork with pid call clone_n.., 1000
+[ff.run] (0.525s) criu> (00.024016) MYCOMMENT: From fork with pid finish clone_n., 1000 with ret=1000
+[ff.run] (0.525s) criu> (00.024032) MYCOMMENT: From fork_with_pid Enter case !(ca.clone_flags & CLONE_NEWPID) for 1000
+[ff.run] (0.525s) criu> (00.024035) MYCOMMENT: From fork_with_pid Enter case ca.core=True, for 1000
+[ff.run] (0.525s) criu> (00.024058) MYCOMMENT: End fork_with_pid for 1000
+[ff.run] (0.525s) criu> (00.024090) MYCOMMENT: Enter rtwc
+[ff.run] (0.526s) criu> (00.024595)   1000: Calling restore_sid() for init
+[ff.run] (0.526s) criu> (00.024651)   1000: Collecting 44/37 (flags 2)
+[ff.run] (0.526s) criu> (00.025294)   1000: tty: Collected tty ID 0x9 (ext)
+[ff.run] (0.527s) criu> (00.025341)   1000: Collecting 45/51 (flags 0)
+[ff.run] (0.528s) criu> (00.026422)   1000: No tty-data.img image
+[ff.run] (0.528s) criu> (00.026586)   1000: Restoring namespaces 1000 flags 0x8000
+[ff.run] (0.528s) criu> (00.026600)   1000: Preparing info about shared resources
+[ff.run] (0.529s) criu> (00.026952)   1000: No seccomp.img image
+[ff.run] (0.529s) criu> (00.026956)   1000: Collecting 48/38 (flags 0)
+[ff.run] (0.529s) criu> (00.027366)   1000: No filelocks.img image
+[ff.run] (0.529s) criu> (00.027370)   1000: Collecting 42/27 (flags 0)
+[ff.run] (0.530s) criu> (00.027964)   1000: No pipes-data.img image
+[ff.run] (0.530s) criu> (00.027968)   1000: Collecting 43/27 (flags 0)
+[ff.run] (0.531s) criu> (00.028568)   1000: No fifo-data.img image
+[ff.run] (0.531s) criu> (00.028571)   1000: Collecting 41/69 (flags 0)
+[ff.run] (0.531s) criu> (00.029140)   1000: No sk-queues.img image
+[ff.run] (0.531s) criu> (00.030423)   1000: vma 0x55db5f6a4000 0x55db5f6a9000
+[ff.run] (0.531s) criu> (00.030448)   1000: vma 0x55db5f6a9000 0x55db5f6bc000
+[ff.run] (0.532s) criu> (00.030451)   1000: vma 0x55db5f6bc000 0x55db5f6c2000
+[ff.run] (0.532s) criu> (00.030452)   1000: vma 0x55db5f6c2000 0x55db5f6c4000
+[ff.run] (0.532s) criu> (00.030453)   1000: vma 0x55db5f6c4000 0x55db5f6c5000
+[ff.run] (0.532s) criu> (00.030460)   1000: vma 0x55db5f6c5000 0x55db5f6c7000
+[ff.run] (0.533s) criu> (00.030462)   1000: vma 0x55db60b65000 0x55db60b86000
+[ff.run] (0.533s) criu> (00.030463)   1000: vma 0x7efdbc71a000 0x7efdc071b000
+[ff.run] (0.534s) criu> (00.030464)   1000: vma 0x7efdc071b000 0x7efdc071d000
+[ff.run] (0.534s) criu> (00.030465)   1000: vma 0x7efdc071d000 0x7efdc0723000
+[ff.run] (0.534s) criu> (00.030466)   1000: vma 0x7efdc0723000 0x7efdc0734000
+[ff.run] (0.534s) criu> (00.030467)   1000: vma 0x7efdc0734000 0x7efdc073a000
+[ff.run] (0.534s) criu> (00.030468)   1000: vma 0x7efdc073a000 0x7efdc073b000
+[ff.run] (0.535s) criu> (00.030469)   1000: vma 0x7efdc073b000 0x7efdc073c000
+[ff.run] (0.535s) criu> (00.030470)   1000: vma 0x7efdc073c000 0x7efdc0740000
+[ff.run] (0.536s) criu> (00.030471)   1000: vma 0x7efdc0740000 0x7efdc0741000
+[ff.run] (0.536s) criu> (00.030472)   1000: vma 0x7efdc0741000 0x7efdc0743000
+[ff.run] (0.536s) criu> (00.030473)   1000: vma 0x7efdc0743000 0x7efdc0744000
+[ff.run] (0.536s) criu> (00.030474)   1000: vma 0x7efdc0744000 0x7efdc0745000
+[ff.run] (0.536s) criu> (00.030474)   1000: vma 0x7efdc0745000 0x7efdc0746000
+[ff.run] (0.536s) criu> (00.030475)   1000: vma 0x7efdc0746000 0x7efdc0768000
+[ff.run] (0.536s) criu> (00.030476)   1000: vma 0x7efdc0768000 0x7efdc08e0000
+[ff.run] (0.536s) criu> (00.030478)   1000: vma 0x7efdc08e0000 0x7efdc092e000
+[ff.run] (0.537s) criu> (00.030479)   1000: vma 0x7efdc092e000 0x7efdc0932000
+[ff.run] (0.538s) criu> (00.030480)   1000: vma 0x7efdc0932000 0x7efdc0934000
+[ff.run] (0.538s) criu> (00.030480)   1000: vma 0x7efdc0934000 0x7efdc0938000
+[ff.run] (0.538s) criu> (00.030481)   1000: vma 0x7efdc093c000 0x7efdc093d000
+[ff.run] (0.538s) criu> (00.030486)   1000: vma 0x7efdc093d000 0x7efdc093e000
+[ff.run] (0.538s) criu> (00.030487)   1000: vma 0x7efdc093e000 0x7efdc093f000
+[ff.run] (0.538s) criu> (00.030488)   1000: vma 0x7efdc093f000 0x7efdc0940000
+[ff.run] (0.538s) criu> (00.030489)   1000: vma 0x7efdc0940000 0x7efdc0941000
+[ff.run] (0.538s) criu> (00.030490)   1000: vma 0x7efdc0941000 0x7efdc0942000
+[ff.run] (0.538s) criu> (00.030491)   1000: vma 0x7efdc0942000 0x7efdc0944000
+[ff.run] (0.538s) criu> (00.030492)   1000: vma 0x7efdc0944000 0x7efdc0945000
+[ff.run] (0.538s) criu> (00.030493)   1000: vma 0x7efdc0945000 0x7efdc0968000
+[ff.run] (0.538s) criu> (00.030574)   1000: vma 0x7efdc0968000 0x7efdc0970000
+[ff.run] (0.538s) criu> (00.030576)   1000: vma 0x7efdc0970000 0x7efdc0971000
+[ff.run] (0.538s) criu> (00.030577)   1000: vma 0x7efdc0971000 0x7efdc0972000
+[ff.run] (0.538s) criu> (00.030578)   1000: vma 0x7efdc0972000 0x7efdc0973000
+[ff.run] (0.538s) criu> (00.030579)   1000: vma 0x7efdc0973000 0x7efdc0974000
+[ff.run] (0.538s) criu> (00.030580)   1000: vma 0x7efdc0974000 0x7efdc0976000
+[ff.run] (0.538s) criu> (00.030581)   1000: vma 0x7efdc0976000 0x7efdc0983000
+[ff.run] (0.539s) criu> (00.030581)   1000: vma 0x7efdc0983000 0x7efdc0986000
+[ff.run] (0.539s) criu> (00.030582)   1000: vma 0x7efdc0986000 0x7efdc0989000
+[ff.run] (0.539s) criu> (00.030583)   1000: vma 0x7efdc0989000 0x7efdc098a000
+[ff.run] (0.539s) criu> (00.030584)   1000: vma 0x7ffe6b197000 0x7ffe6b1b8000
+[ff.run] (0.539s) criu> (00.030585)   1000: vma 0x7ffe6b1ee000 0x7ffe6b1f2000
+[ff.run] (0.539s) criu> (00.030586)   1000: vma 0x7ffe6b1f2000 0x7ffe6b1f4000
+[ff.run] (0.539s) criu> (00.030587)   1000: vma 0xffffffffff600000 0xffffffffff601000
+[ff.run] (0.539s) criu> (00.031523)   1000: Collect fdinfo pid=1000 fd=0 id=0x9
+[ff.run] (0.539s) criu> (00.031526)   1000: Collect fdinfo pid=1000 fd=1 id=0x9
+[ff.run] (0.539s) criu> (00.031618)   1000: Collect fdinfo pid=1000 fd=2 id=0x9
+[ff.run] (0.539s) criu> (00.031620)   1000: Collect fdinfo pid=1000 fd=10 id=0xb
+[ff.run] (0.539s) criu> (00.033444)   1000: vma 0x55a00d6e2000 0x55a00d6e3000
+[ff.run] (0.539s) criu> (00.033447)   1000: vma 0x55a00d6e3000 0x55a00d6e4000
+[ff.run] (0.539s) criu> (00.033448)   1000: vma 0x55a00d6e4000 0x55a00d6e5000
+[ff.run] (0.539s) criu> (00.033456)   1000: vma 0x55a00d6e5000 0x55a00d6e6000
+[ff.run] (0.539s) criu> (00.033457)   1000: vma 0x55a00d6e6000 0x55a00d6e7000
+[ff.run] (0.540s) criu> (00.033458)   1000: vma 0x55a00ead8000 0x55a00eaf9000
+[ff.run] (0.540s) criu> (00.033459)   1000: vma 0x7f754c6d5000 0x7f75546d6000
+[ff.run] (0.540s) criu> (00.033460)   1000: vma 0x7f75546d6000 0x7f75586d7000
+[ff.run] (0.540s) criu> (00.033461)   1000: vma 0x7f75586d7000 0x7f75586d9000
+[ff.run] (0.540s) criu> (00.033462)   1000: vma 0x7f75586d9000 0x7f75586df000
+[ff.run] (0.540s) criu> (00.033463)   1000: vma 0x7f75586df000 0x7f75586f0000
+[ff.run] (0.541s) criu> (00.033464)   1000: vma 0x7f75586f0000 0x7f75586f6000
+[ff.run] (0.541s) criu> (00.033465)   1000: vma 0x7f75586f6000 0x7f75586f7000
+[ff.run] (0.541s) criu> (00.033466)   1000: vma 0x7f75586f7000 0x7f75586f8000
+[ff.run] (0.541s) criu> (00.033466)   1000: vma 0x7f75586f8000 0x7f75586fc000
+[ff.run] (0.541s) criu> (00.033467)   1000: vma 0x7f75586fc000 0x7f75586fd000
+[ff.run] (0.541s) criu> (00.033468)   1000: vma 0x7f75586fd000 0x7f75586ff000
+[ff.run] (0.541s) criu> (00.033469)   1000: vma 0x7f75586ff000 0x7f7558700000
+[ff.run] (0.541s) criu> (00.033470)   1000: vma 0x7f7558700000 0x7f7558701000
+[ff.run] (0.541s) criu> (00.033471)   1000: vma 0x7f7558701000 0x7f7558702000
+[ff.run] (0.541s) criu> (00.033472)   1000: vma 0x7f7558702000 0x7f7558724000
+[ff.run] (0.541s) criu> (00.033473)   1000: vma 0x7f7558724000 0x7f755889c000
+[ff.run] (0.541s) criu> (00.033474)   1000: vma 0x7f755889c000 0x7f75588ea000
+[ff.run] (0.542s) criu> (00.033474)   1000: vma 0x7f75588ea000 0x7f75588ee000
+[ff.run] (0.542s) criu> (00.033475)   1000: vma 0x7f75588ee000 0x7f75588f0000
+[ff.run] (0.542s) criu> (00.033476)   1000: vma 0x7f75588f0000 0x7f75588f4000
+[ff.run] (0.542s) criu> (00.033477)   1000: vma 0x7f75588f8000 0x7f75588f9000
+[ff.run] (0.542s) criu> (00.033478)   1000: vma 0x7f75588f9000 0x7f75588fa000
+[ff.run] (0.542s) criu> (00.033479)   1000: vma 0x7f75588fa000 0x7f75588fb000
+[ff.run] (0.542s) criu> (00.033483)   1000: vma 0x7f75588fb000 0x7f75588fc000
+[ff.run] (0.542s) criu> (00.033484)   1000: vma 0x7f75588fc000 0x7f75588fd000
+[ff.run] (0.542s) criu> (00.033485)   1000: vma 0x7f75588fd000 0x7f75588fe000
+[ff.run] (0.542s) criu> (00.033486)   1000: vma 0x7f75588fe000 0x7f7558900000
+[ff.run] (0.542s) criu> (00.033487)   1000: vma 0x7f7558900000 0x7f7558901000
+[ff.run] (0.542s) criu> (00.033488)   1000: vma 0x7f7558901000 0x7f7558924000
+[ff.run] (0.542s) criu> (00.033489)   1000: vma 0x7f7558924000 0x7f755892c000
+[ff.run] (0.542s) criu> (00.033489)   1000: vma 0x7f755892c000 0x7f755892d000
+[ff.run] (0.542s) criu> (00.033490)   1000: vma 0x7f755892d000 0x7f755892e000
+[ff.run] (0.542s) criu> (00.033491)   1000: vma 0x7f755892e000 0x7f755892f000
+[ff.run] (0.542s) criu> (00.033492)   1000: vma 0x7f755892f000 0x7f7558930000
+[ff.run] (0.542s) criu> (00.033493)   1000: vma 0x7f7558930000 0x7f7558932000
+[ff.run] (0.542s) criu> (00.033494)   1000: vma 0x7f7558932000 0x7f755893f000
+[ff.run] (0.542s) criu> (00.033495)   1000: vma 0x7f755893f000 0x7f7558942000
+[ff.run] (0.542s) criu> (00.033496)   1000: vma 0x7f7558942000 0x7f7558945000
+[ff.run] (0.542s) criu> (00.033497)   1000: vma 0x7f7558945000 0x7f7558946000
+[ff.run] (0.542s) criu> (00.033498)   1000: vma 0x7ffff7871000 0x7ffff7892000
+[ff.run] (0.542s) criu> (00.033499)   1000: vma 0x7ffff79d7000 0x7ffff79db000
+[ff.run] (0.542s) criu> (00.033500)   1000: vma 0x7ffff79db000 0x7ffff79dd000
+[ff.run] (0.542s) criu> (00.033501)   1000: vma 0xffffffffff600000 0xffffffffff601000
+[ff.run] (0.542s) criu> (00.034349)   1000: Collect fdinfo pid=1002 fd=0 id=0xf
+[ff.run] (0.542s) criu> (00.034354)   1000: Collect fdinfo pid=1002 fd=1 id=0x9
+[ff.run] (0.543s) criu> (00.034356)   1000: Collect fdinfo pid=1002 fd=2 id=0x9
+[ff.run] (0.543s) criu> (00.036928)   1000: vma 0x562633489000 0x56263348a000
+[ff.run] (0.543s) criu> (00.036931)   1000: vma 0x56263348a000 0x56263348b000
+[ff.run] (0.543s) criu> (00.036932)   1000: vma 0x56263348b000 0x56263348c000
+[ff.run] (0.543s) criu> (00.036933)   1000: vma 0x56263348c000 0x56263348d000
+[ff.run] (0.543s) criu> (00.036934)   1000: vma 0x56263348d000 0x56263348e000
+[ff.run] (0.543s) criu> (00.036981)   1000: vma 0x562634477000 0x562634498000
+[ff.run] (0.543s) criu> (00.036982)   1000: vma 0x7f539bf98000 0x7f53a3f99000
+[ff.run] (0.543s) criu> (00.036983)   1000: vma 0x7f53a3f99000 0x7f53a7f9a000
+[ff.run] (0.543s) criu> (00.036984)   1000: vma 0x7f53a7f9a000 0x7f53a7f9c000
+[ff.run] (0.543s) criu> (00.037029)   1000: vma 0x7f53a7f9c000 0x7f53a7fa2000
+[ff.run] (0.543s) criu> (00.037032)   1000: vma 0x7f53a7fa2000 0x7f53a7fb3000
+[ff.run] (0.543s) criu> (00.037033)   1000: vma 0x7f53a7fb3000 0x7f53a7fb9000
+[ff.run] (0.543s) criu> (00.037034)   1000: vma 0x7f53a7fb9000 0x7f53a7fba000
+[ff.run] (0.544s) criu> (00.037035)   1000: vma 0x7f53a7fba000 0x7f53a7fbb000
+[ff.run] (0.544s) criu> (00.037079)   1000: vma 0x7f53a7fbb000 0x7f53a7fbf000
+[ff.run] (0.544s) criu> (00.037082)   1000: vma 0x7f53a7fbf000 0x7f53a7fc0000
+[ff.run] (0.544s) criu> (00.037082)   1000: vma 0x7f53a7fc0000 0x7f53a7fc2000
+[ff.run] (0.544s) criu> (00.037083)   1000: vma 0x7f53a7fc2000 0x7f53a7fc3000
+[ff.run] (0.544s) criu> (00.037084)   1000: vma 0x7f53a7fc3000 0x7f53a7fc4000
+[ff.run] (0.544s) criu> (00.037085)   1000: vma 0x7f53a7fc4000 0x7f53a7fc5000
+[ff.run] (0.544s) criu> (00.037132)   1000: vma 0x7f53a7fc5000 0x7f53a7fe7000
+[ff.run] (0.544s) criu> (00.037133)   1000: vma 0x7f53a7fe7000 0x7f53a815f000
+[ff.run] (0.544s) criu> (00.037134)   1000: vma 0x7f53a815f000 0x7f53a81ad000
+[ff.run] (0.544s) criu> (00.037134)   1000: vma 0x7f53a81ad000 0x7f53a81b1000
+[ff.run] (0.544s) criu> (00.037135)   1000: vma 0x7f53a81b1000 0x7f53a81b3000
+[ff.run] (0.544s) criu> (00.037182)   1000: vma 0x7f53a81b3000 0x7f53a81b7000
+[ff.run] (0.544s) criu> (00.037183)   1000: vma 0x7f53a81bb000 0x7f53a81bc000
+[ff.run] (0.544s) criu> (00.037184)   1000: vma 0x7f53a81bc000 0x7f53a81bd000
+[ff.run] (0.544s) criu> (00.037185)   1000: vma 0x7f53a81bd000 0x7f53a81be000
+[ff.run] (0.544s) criu> (00.037244)   1000: vma 0x7f53a81be000 0x7f53a81bf000
+[ff.run] (0.544s) criu> (00.037247)   1000: vma 0x7f53a81bf000 0x7f53a81c0000
+[ff.run] (0.544s) criu> (00.037252)   1000: vma 0x7f53a81c0000 0x7f53a81c1000
+[ff.run] (0.544s) criu> (00.037253)   1000: vma 0x7f53a81c1000 0x7f53a81c3000
+[ff.run] (0.544s) criu> (00.037253)   1000: vma 0x7f53a81c3000 0x7f53a81c4000
+[ff.run] (0.544s) criu> (00.037312)   1000: vma 0x7f53a81c4000 0x7f53a81e7000
+[ff.run] (0.544s) criu> (00.037314)   1000: vma 0x7f53a81e7000 0x7f53a81ef000
+[ff.run] (0.544s) criu> (00.037315)   1000: vma 0x7f53a81ef000 0x7f53a81f0000
+[ff.run] (0.545s) criu> (00.037316)   1000: vma 0x7f53a81f0000 0x7f53a81f1000
+[ff.run] (0.545s) criu> (00.037317)   1000: vma 0x7f53a81f1000 0x7f53a81f2000
+[ff.run] (0.545s) criu> (00.037318)   1000: vma 0x7f53a81f2000 0x7f53a81f3000
+[ff.run] (0.545s) criu> (00.037319)   1000: vma 0x7f53a81f3000 0x7f53a81f5000
+[ff.run] (0.545s) criu> (00.037320)   1000: vma 0x7f53a81f5000 0x7f53a8202000
+[ff.run] (0.545s) criu> (00.037320)   1000: vma 0x7f53a8202000 0x7f53a8205000
+[ff.run] (0.545s) criu> (00.037378)   1000: vma 0x7f53a8205000 0x7f53a8208000
+[ff.run] (0.545s) criu> (00.037382)   1000: vma 0x7f53a8208000 0x7f53a8209000
+[ff.run] (0.545s) criu> (00.037383)   1000: vma 0x7ffcaf3fc000 0x7ffcaf41d000
+[ff.run] (0.545s) criu> (00.037383)   1000: vma 0x7ffcaf498000 0x7ffcaf49c000
+[ff.run] (0.545s) criu> (00.037384)   1000: vma 0x7ffcaf49c000 0x7ffcaf49e000
+[ff.run] (0.545s) criu> (00.037385)   1000: vma 0xffffffffff600000 0xffffffffff601000
+[ff.run] (0.545s) criu> (00.037685)   1000: Collect fdinfo pid=1001 fd=0 id=0xe
+[ff.run] (0.545s) criu> (00.037688)   1000: Collect fdinfo pid=1001 fd=1 id=0x9
+[ff.run] (0.545s) criu> (00.037689)   1000: Collect fdinfo pid=1001 fd=2 id=0x9
+[ff.run] (0.545s) criu> (00.038809)   1000: skqueue: Preparing SCMs
+[ff.run] (0.545s) criu> (00.038813)   1000: tty: Inherit terminal for id 0x9
+[ff.run] (0.545s) criu> (00.038814)   1000: tty: head driver ext id 0x9 index 1012 (master 0 sid 1 pgrp 1 inherit 1)
+[ff.run] (0.546s) criu> (00.038817)   1000: File descs:
+[ff.run] (0.546s) criu> (00.038818)   1000:  `- type 1 ID 0x1
+[ff.run] (0.546s) criu> (00.038818)   1000:  `- type 1 ID 0x2
+[ff.run] (0.546s) criu> (00.038819)   1000:  `- type 1 ID 0x3
+[ff.run] (0.546s) criu> (00.038820)   1000:  `- type 1 ID 0x4
+[ff.run] (0.546s) criu> (00.038821)   1000:  `- type 1 ID 0x5
+[ff.run] (0.546s) criu> (00.038822)   1000:  `- type 1 ID 0x6
+[ff.run] (0.546s) criu> (00.038823)   1000:  `- type 1 ID 0x7
+[ff.run] (0.547s) criu> (00.038823)   1000:  `- type 1 ID 0x8
+[ff.run] (0.547s) criu> (00.038824)   1000:  `- type 11 ID 0x9
+[ff.run] (0.547s) criu> (00.038825)   1000:    `- FD 0 pid 1000
+[ff.run] (0.547s) criu> (00.039000)   1000:    `- FD 1 pid 1000
+[ff.run] (0.547s) criu> (00.039002)   1000:    `- FD 2 pid 1000
+[ff.run] (0.547s) criu> (00.039003)   1000:    `- FD 1 pid 1001
+[ff.run] (0.547s) criu> (00.039004)   1000:    `- FD 2 pid 1001
+[ff.run] (0.547s) criu> (00.039004)   1000:    `- FD 1 pid 1002
+[ff.run] (0.547s) criu> (00.039005)   1000:    `- FD 2 pid 1002
+[ff.run] (0.547s) criu> (00.039086)   1000:  `- type 1 ID 0xa
+[ff.run] (0.547s) criu> (00.039095)   1000:  `- type 1 ID 0xb
+[ff.run] (0.547s) criu> (00.039097)   1000:    `- FD 10 pid 1000
+[ff.run] (0.547s) criu> (00.039098)   1000:  `- type 1 ID 0xc
+[ff.run] (0.547s) criu> (00.039099)   1000:  `- type 1 ID 0xd
+[ff.run] (0.547s) criu> (00.039099)   1000:  `- type 1 ID 0xe
+[ff.run] (0.547s) criu> (00.039100)   1000:    `- FD 0 pid 1001
+[ff.run] (0.547s) criu> (00.039101)   1000:  `- type 1 ID 0xf
+[ff.run] (0.547s) criu> (00.039102)   1000:    `- FD 0 pid 1002
+[ff.run] (0.547s) criu> (00.044964)   1000: pr1000-1 Read 55db5f6a9000 1 pages
+[ff.run] (0.547s) criu> (00.044978)   1000: pr1000-1 Read 55db5f6c2000 2 pages
+[ff.run] (0.547s) criu> (00.044985)   1000: pr1000-1 Read 55db5f6c4000 1 pages
+[ff.run] (0.547s) criu> (00.044990)   1000: pr1000-1 Read 55db5f6c6000 1 pages
+[ff.run] (0.548s) criu> (00.045160)   1000: pr1000-1 Read 55db60b65000 2 pages
+[ff.run] (0.548s) criu> (00.045171)   1000: pr1000-1 Read 7efdc071b000 2 pages
+[ff.run] (0.548s) criu> (00.045486)   1000: pr1000-1 Read 7efdc073a000 1 pages
+[ff.run] (0.548s) criu> (00.045543)   1000: pr1000-1 Read 7efdc073b000 1 pages
+[ff.run] (0.548s) criu> (00.045643)   1000: pr1000-1 Read 7efdc073f000 1 pages
+[ff.run] (0.548s) criu> (00.045742)   1000: pr1000-1 Read 7efdc0744000 1 pages
+[ff.run] (0.548s) criu> (00.045810)   1000: pr1000-1 Read 7efdc0745000 1 pages
+[ff.run] (0.548s) criu> (00.045924)   1000: pr1000-1 Read 7efdc092e000 4 pages
+[ff.run] (0.548s) criu> (00.046033)   1000: pr1000-1 Read 7efdc0932000 2 pages
+[ff.run] (0.548s) criu> (00.046102)   1000: pr1000-1 Read 7efdc0934000 2 pages
+[ff.run] (0.548s) criu> (00.046246)   1000: pr1000-1 Read 7efdc0937000 1 pages
+[ff.run] (0.548s) criu> (00.046299)   1000: pr1000-1 Read 7efdc093f000 1 pages
+[ff.run] (0.548s) criu> (00.046399)   1000: pr1000-1 Read 7efdc0940000 1 pages
+[ff.run] (0.548s) criu> (00.046496)   1000: pr1000-1 Read 7efdc0941000 1 pages
+[ff.run] (0.548s) criu> (00.046564)   1000: pr1000-1 Read 7efdc0942000 2 pages
+[ff.run] (0.548s) criu> (00.046665)   1000: pr1000-1 Read 7efdc0971000 1 pages
+[ff.run] (0.548s) criu> (00.046764)   1000: pr1000-1 Read 7efdc0972000 1 pages
+[ff.run] (0.548s) criu> (00.046865)   1000: pr1000-1 Read 7efdc0973000 1 pages
+[ff.run] (0.548s) criu> (00.046964)   1000: pr1000-1 Read 7efdc0986000 3 pages
+[ff.run] (0.548s) criu> (00.047113)   1000: pr1000-1 Read 7efdc0989000 1 pages
+[ff.run] (0.548s) criu> (00.047211)   1000: pr1000-1 Read 7ffe6b1b4000 4 pages
+[ff.run] (0.548s) criu> (00.047365)   1000: pr1000-1 Read 7ffe6b1f2000 2 pages
+[ff.run] (0.548s) criu> (00.047502)   1000: nr_restored_pages: 41
+[ff.run] (0.549s) criu> (00.047506)   1000: nr_shared_pages:   0
+[ff.run] (0.549s) criu> (00.047507)   1000: nr_dropped_pages:   0
+[ff.run] (0.549s) criu> (00.047508)   1000: nr_lazy:           0
+[ff.run] (0.549s) criu> (00.047510)   1000: Restore on-core sigactions for 1000
+[ff.run] (0.549s) criu> (00.047922)   1000: Restoring children in alien sessions:
+[ff.run] (0.549s) criu> (00.047950)   1000: Restoring children in our session:
+[ff.run] (0.550s) criu> (00.047954)   1000: MYCOMMENT: Start fork_with_pid for pid 1002
+[ff.run] (0.550s) criu> (00.048742)   1000: Forking task with 1002 pid (flags 0x0)
+[ff.run] (0.550s) criu> (00.049359)   1000: MYCOMMENT: From fork with pid call clone_n.., 1002
+[ff.run] (0.552s) criu> (00.050330)   1000: MYCOMMENT: From fork with pid finish clone_n., 1002 with ret=1002
+[ff.run] (0.552s) criu> (00.050373)   1000: MYCOMMENT: From fork_with_pid Enter case !(ca.clone_flags & CLONE_NEWPID) for 1002
+[ff.run] (0.558s) criu> (00.050378)   1000: MYCOMMENT: From fork_with_pid Enter case ca.core=True, for 1002
+[ff.run] (0.558s) criu> (00.050409)   1000: MYCOMMENT: End fork_with_pid for 1002
+[ff.run] (0.559s) criu> (00.050412)   1000: MYCOMMENT: Start fork_with_pid for pid 1001
+[ff.run] (0.559s) criu> (00.050484)   1000: MYCOMMENT: Enter rtwc
+[ff.run] (0.559s) criu> (00.050965)   1000: Forking task with 1001 pid (flags 0x0)
+[ff.run] (0.560s) criu> (00.058740)   1002: pr1002-2 Read 55a00d6e3000 1 pages
+[ff.run] (0.560s) criu> (00.058812)   1002: pr1002-2 Read 55a00d6e5000 1 pages
+[ff.run] (0.560s) criu> (00.058830)   1002: pr1002-2 Read 55a00d6e6000 1 pages
+[ff.run] (0.560s) criu> (00.058836)   1002: pr1002-2 Read 55a00ead8000 1 pages
+[ff.run] (0.560s) criu> (00.058840)   1002: pr1002-2 Read 7f754c6d5000 255 pages
+[ff.run] (0.561s) criu> (00.059607)   1002: pr1002-2 Read 7f754c7d4000 256 pages
+[ff.run] (0.561s) criu> (00.060038)   1002: pr1002-2 Read 7f754c8d4000 256 pages
+[ff.run] (0.562s) criu> (00.060498)   1002: pr1002-2 Read 7f754c9d4000 256 pages
+[ff.run] (0.562s) criu> (00.061161)   1002: pr1002-2 Read 7f754cad4000 256 pages
+[ff.run] (0.563s) criu> (00.061764)   1002: pr1002-2 Read 7f754cbd4000 256 pages
+[ff.run] (0.565s) criu> (00.062339)   1002: pr1002-2 Read 7f754ccd4000 256 pages
+[ff.run] (0.565s) criu> (00.062798)   1002: pr1002-2 Read 7f754cdd4000 256 pages
+[ff.run] (0.565s) criu> (00.063139)   1002: pr1002-2 Read 7f754ced4000 256 pages
+[ff.run] (0.565s) criu> (00.063493)   1002: pr1002-2 Read 7f754cfd4000 256 pages
+[ff.run] (0.565s) criu> (00.064126)   1002: pr1002-2 Read 7f754d0d4000 256 pages
+[ff.run] (0.567s) criu> (00.065338)   1002: pr1002-2 Read 7f754d1d4000 256 pages
+[ff.run] (0.568s) criu> (00.066245)   1002: pr1002-2 Read 7f754d2d4000 256 pages
+[ff.run] (0.568s) criu> (00.066623)   1002: pr1002-2 Read 7f754d3d4000 256 pages
+[ff.run] (0.568s) criu> (00.067246)   1002: pr1002-2 Read 7f754d4d4000 256 pages
+[ff.run] (0.571s) criu> (00.067984)   1002: pr1002-2 Read 7f754d5d4000 256 pages
+[ff.run] (0.571s) criu> (00.068337)   1002: pr1002-2 Read 7f754d6d4000 256 pages
+[ff.run] (0.571s) criu> (00.068691)   1002: pr1002-2 Read 7f754d7d4000 256 pages
+[ff.run] (0.571s) criu> (00.069047)   1002: pr1002-2 Read 7f754d8d4000 256 pages
+[ff.run] (0.571s) criu> (00.069403)   1002: pr1002-2 Read 7f754d9d4000 256 pages
+[ff.run] (0.572s) criu> (00.070228)   1002: pr1002-2 Read 7f754dad4000 256 pages
+[ff.run] (0.572s) criu> (00.070584)   1002: pr1002-2 Read 7f754dbd4000 256 pages
+[ff.run] (0.572s) criu> (00.070926)   1002: pr1002-2 Read 7f754dcd4000 256 pages
+[ff.run] (0.572s) criu> (00.071447)   1002: pr1002-2 Read 7f754ddd4000 256 pages
+[ff.run] (0.573s) criu> (00.071960)   1002: pr1002-2 Read 7f754ded4000 256 pages
+[ff.run] (0.573s) criu> (00.072498)   1002: pr1002-2 Read 7f754dfd4000 256 pages
+[ff.run] (0.574s) criu> (00.072990)   1002: pr1002-2 Read 7f754e0d4000 256 pages
+[ff.run] (0.574s) criu> (00.073507)   1002: pr1002-2 Read 7f754e1d4000 256 pages
+[ff.run] (0.575s) criu> (00.074335)   1002: pr1002-2 Read 7f754e2d4000 256 pages
+[ff.run] (0.576s) criu> (00.074960)   1002: pr1002-2 Read 7f754e3d4000 256 pages
+[ff.run] (0.578s) criu> (00.075974)   1002: pr1002-2 Read 7f754e4d4000 256 pages
+[ff.run] (0.578s) criu> (00.076376)   1002: pr1002-2 Read 7f754e5d4000 256 pages
+[ff.run] (0.578s) criu> (00.076755)   1002: pr1002-2 Read 7f754e6d4000 256 pages
+[ff.run] (0.578s) criu> (00.077535)   1002: pr1002-2 Read 7f754e7d4000 256 pages
+[ff.run] (0.579s) criu> (00.078106)   1002: pr1002-2 Read 7f754e8d4000 256 pages
+[ff.run] (0.580s) criu> (00.078632)   1002: pr1002-2 Read 7f754e9d4000 256 pages
+[ff.run] (0.582s) criu> (00.079189)   1002: pr1002-2 Read 7f754ead4000 256 pages
+[ff.run] (0.582s) criu> (00.079548)   1002: pr1002-2 Read 7f754ebd4000 256 pages
+[ff.run] (0.582s) criu> (00.079916)   1002: pr1002-2 Read 7f754ecd4000 256 pages
+[ff.run] (0.582s) criu> (00.080284)   1002: pr1002-2 Read 7f754edd4000 256 pages
+[ff.run] (0.583s) criu> (00.081460)   1002: pr1002-2 Read 7f754eed4000 256 pages
+[ff.run] (0.583s) criu> (00.081867)   1002: pr1002-2 Read 7f754efd4000 256 pages
+[ff.run] (0.583s) criu> (00.082252)   1002: pr1002-2 Read 7f754f0d4000 256 pages
+[ff.run] (0.584s) criu> (00.082793)   1002: pr1002-2 Read 7f754f1d4000 256 pages
+[ff.run] (0.584s) criu> (00.083349)   1002: pr1002-2 Read 7f754f2d4000 256 pages
+[ff.run] (0.585s) criu> (00.083947)   1002: pr1002-2 Read 7f754f3d4000 256 pages
+[ff.run] (0.585s) criu> (00.084488)   1002: pr1002-2 Read 7f754f4d4000 256 pages
+[ff.run] (0.586s) criu> (00.085122)   1002: pr1002-2 Read 7f754f5d4000 256 pages
+[ff.run] (0.587s) criu> (00.085802)   1002: pr1002-2 Read 7f754f6d4000 256 pages
+[ff.run] (0.588s) criu> (00.086368)   1002: pr1002-2 Read 7f754f7d4000 256 pages
+[ff.run] (0.589s) criu> (00.087228)   1002: pr1002-2 Read 7f754f8d4000 256 pages
+[ff.run] (0.589s) criu> (00.087616)   1002: pr1002-2 Read 7f754f9d4000 256 pages
+[ff.run] (0.589s) criu> (00.087982)   1002: pr1002-2 Read 7f754fad4000 256 pages
+[ff.run] (0.589s) criu> (00.088495)   1002: pr1002-2 Read 7f754fbd4000 256 pages
+[ff.run] (0.592s) criu> (00.088985)   1002: pr1002-2 Read 7f754fcd4000 256 pages
+[ff.run] (0.592s) criu> (00.089366)   1002: pr1002-2 Read 7f754fdd4000 256 pages
+[ff.run] (0.592s) criu> (00.089749)   1002: pr1002-2 Read 7f754fed4000 256 pages
+[ff.run] (0.592s) criu> (00.090121)   1002: pr1002-2 Read 7f754ffd4000 256 pages
+[ff.run] (0.592s) criu> (00.090566)   1002: pr1002-2 Read 7f75500d4000 256 pages
+[ff.run] (0.592s) criu> (00.090945)   1002: pr1002-2 Read 7f75501d4000 256 pages
+[ff.run] (0.594s) criu> (00.092135)   1002: pr1002-2 Read 7f75502d4000 256 pages
+[ff.run] (0.594s) criu> (00.092581)   1002: pr1002-2 Read 7f75503d4000 256 pages
+[ff.run] (0.594s) criu> (00.093319)   1002: pr1002-2 Read 7f75504d4000 256 pages
+[ff.run] (0.595s) criu> (00.093837)   1002: pr1002-2 Read 7f75505d4000 256 pages
+[ff.run] (0.595s) criu> (00.094414)   1002: pr1002-2 Read 7f75506d4000 256 pages
+[ff.run] (0.596s) criu> (00.094972)   1002: pr1002-2 Read 7f75507d4000 256 pages
+[ff.run] (0.598s) criu> (00.095646)   1002: pr1002-2 Read 7f75508d4000 256 pages
+[ff.run] (0.598s) criu> (00.096002)   1002: pr1002-2 Read 7f75509d4000 256 pages
+[ff.run] (0.598s) criu> (00.096354)   1002: pr1002-2 Read 7f7550ad4000 256 pages
+[ff.run] (0.598s) criu> (00.096712)   1002: pr1002-2 Read 7f7550bd4000 256 pages
+[ff.run] (0.600s) criu> (00.098244)   1002: pr1002-2 Read 7f7550cd4000 256 pages
+[ff.run] (0.600s) criu> (00.098653)   1002: pr1002-2 Read 7f7550dd4000 256 pages
+[ff.run] (0.600s) criu> (00.099221)   1002: pr1002-2 Read 7f7550ed4000 256 pages
+[ff.run] (0.601s) criu> (00.099771)   1002: pr1002-2 Read 7f7550fd4000 256 pages
+[ff.run] (0.601s) criu> (00.100302)   1002: pr1002-2 Read 7f75510d4000 256 pages
+[ff.run] (0.604s) criu> (00.100877)   1002: pr1002-2 Read 7f75511d4000 256 pages
+[ff.run] (0.604s) criu> (00.101245)   1002: pr1002-2 Read 7f75512d4000 256 pages
+[ff.run] (0.604s) criu> (00.101613)   1002: pr1002-2 Read 7f75513d4000 256 pages
+[ff.run] (0.604s) criu> (00.101996)   1002: pr1002-2 Read 7f75514d4000 256 pages
+[ff.run] (0.604s) criu> (00.102365)   1002: pr1002-2 Read 7f75515d4000 256 pages
+[ff.run] (0.605s) criu> (00.103149)   1002: pr1002-2 Read 7f75516d4000 256 pages
+[ff.run] (0.605s) criu> (00.103563)   1002: pr1002-2 Read 7f75517d4000 256 pages
+[ff.run] (0.605s) criu> (00.103983)   1002: pr1002-2 Read 7f75518d4000 256 pages
+[ff.run] (0.606s) criu> (00.104559)   1002: pr1002-2 Read 7f75519d4000 256 pages
+[ff.run] (0.606s) criu> (00.105347)   1002: pr1002-2 Read 7f7551ad4000 256 pages
+[ff.run] (0.608s) criu> (00.106748)   1002: pr1002-2 Read 7f7551bd4000 256 pages
+[ff.run] (0.608s) criu> (00.107404)   1002: pr1002-2 Read 7f7551cd4000 256 pages
+[ff.run] (0.609s) criu> (00.108055)   1002: pr1002-2 Read 7f7551dd4000 256 pages
+[ff.run] (0.610s) criu> (00.108667)   1002: pr1002-2 Read 7f7551ed4000 256 pages
+[ff.run] (0.611s) criu> (00.109307)   1002: pr1002-2 Read 7f7551fd4000 256 pages
+[ff.run] (0.612s) criu> (00.110200)   1002: pr1002-2 Read 7f75520d4000 256 pages
+[ff.run] (0.612s) criu> (00.110640)   1002: pr1002-2 Read 7f75521d4000 256 pages
+[ff.run] (0.612s) criu> (00.111104)   1002: pr1002-2 Read 7f75522d4000 256 pages
+[ff.run] (0.613s) criu> (00.111736)   1002: pr1002-2 Read 7f75523d4000 256 pages
+[ff.run] (0.613s) criu> (00.112366)   1002: pr1002-2 Read 7f75524d4000 256 pages
+[ff.run] (0.614s) criu> (00.112929)   1002: pr1002-2 Read 7f75525d4000 256 pages
+[ff.run] (0.615s) criu> (00.113573)   1002: pr1002-2 Read 7f75526d4000 256 pages
+[ff.run] (0.616s) criu> (00.114271)   1002: pr1002-2 Read 7f75527d4000 256 pages
+[ff.run] (0.620s) criu> (00.119079)   1002: pr1002-2 Read 7f75528d4000 256 pages
+[ff.run] (0.622s) criu> (00.120639)   1002: pr1002-2 Read 7f75529d4000 256 pages
+[ff.run] (0.624s) criu> (00.121700)   1002: pr1002-2 Read 7f7552ad4000 256 pages
+[ff.run] (0.624s) criu> (00.122184)   1002: pr1002-2 Read 7f7552bd4000 256 pages
+[ff.run] (0.624s) criu> (00.122663)   1002: pr1002-2 Read 7f7552cd4000 256 pages
+[ff.run] (0.624s) criu> (00.123446)   1002: pr1002-2 Read 7f7552dd4000 256 pages
+[ff.run] (0.625s) criu> (00.124108)   1002: pr1002-2 Read 7f7552ed4000 256 pages
+[ff.run] (0.626s) criu> (00.124936)   1002: pr1002-2 Read 7f7552fd4000 256 pages
+[ff.run] (0.627s) criu> (00.126041)   1002: pr1002-2 Read 7f75530d4000 256 pages
+[ff.run] (0.628s) criu> (00.126906)   1002: pr1002-2 Read 7f75531d4000 256 pages
+[ff.run] (0.630s) criu> (00.127611)   1002: pr1002-2 Read 7f75532d4000 256 pages
+[ff.run] (0.630s) criu> (00.128370)   1002: pr1002-2 Read 7f75533d4000 256 pages
+[ff.run] (0.632s) criu> (00.129649)   1002: pr1002-2 Read 7f75534d4000 256 pages
+[ff.run] (0.632s) criu> (00.130289)   1002: pr1002-2 Read 7f75535d4000 256 pages
+[ff.run] (0.632s) criu> (00.130816)   1002: pr1002-2 Read 7f75536d4000 256 pages
+[ff.run] (0.633s) criu> (00.131797)   1002: pr1002-2 Read 7f75537d4000 256 pages
+[ff.run] (0.633s) criu> (00.132414)   1002: pr1002-2 Read 7f75538d4000 256 pages
+[ff.run] (0.634s) criu> (00.133136)   1002: pr1002-2 Read 7f75539d4000 256 pages
+[ff.run] (0.635s) criu> (00.133889)   1002: pr1002-2 Read 7f7553ad4000 256 pages
+[ff.run] (0.636s) criu> (00.134642)   1002: pr1002-2 Read 7f7553bd4000 256 pages
+[ff.run] (0.636s) criu> (00.135395)   1002: pr1002-2 Read 7f7553cd4000 256 pages
+[ff.run] (0.638s) criu> (00.136579)   1002: pr1002-2 Read 7f7553dd4000 256 pages
+[ff.run] (0.640s) criu> (00.137694)   1002: pr1002-2 Read 7f7553ed4000 256 pages
+[ff.run] (0.640s) criu> (00.138150)   1002: pr1002-2 Read 7f7553fd4000 256 pages
+[ff.run] (0.640s) criu> (00.138582)   1002: pr1002-2 Read 7f75540d4000 256 pages
+[ff.run] (0.640s) criu> (00.139198)   1002: pr1002-2 Read 7f75541d4000 256 pages
+[ff.run] (0.641s) criu> (00.139898)   1002: pr1002-2 Read 7f75542d4000 256 pages
+[ff.run] (0.642s) criu> (00.140747)   1002: pr1002-2 Read 7f75543d4000 256 pages
+[ff.run] (0.642s) criu> (00.141453)   1002: pr1002-2 Read 7f75544d4000 256 pages
+[ff.run] (0.644s) criu> (00.142769)   1002: pr1002-2 Read 7f75545d4000 256 pages
+[ff.run] (0.649s) criu> (00.147326)   1002: pr1002-2 Read 7f75546d4000 2 pages
+[ff.run] (0.649s) criu> (00.147364)   1002: pr1002-2 Read 7f75586d7000 2 pages
+[ff.run] (0.649s) criu> (00.147372)   1002: pr1002-2 Read 7f75586f6000 1 pages
+[ff.run] (0.649s) criu> (00.147383)   1002: pr1002-2 Read 7f75586f7000 1 pages
+[ff.run] (0.649s) criu> (00.147388)   1002: pr1002-2 Read 7f75586fb000 1 pages
+[ff.run] (0.649s) criu> (00.147392)   1002: pr1002-2 Read 7f7558700000 1 pages
+[ff.run] (0.649s) criu> (00.147398)   1002: pr1002-2 Read 7f7558701000 1 pages
+[ff.run] (0.649s) criu> (00.147404)   1002: pr1002-2 Read 7f75588ea000 4 pages
+[ff.run] (0.649s) criu> (00.147418)   1002: pr1002-2 Read 7f75588ee000 2 pages
+[ff.run] (0.649s) criu> (00.147428)   1002: pr1002-2 Read 7f75588f0000 2 pages
+[ff.run] (0.649s) criu> (00.147433)   1002: pr1002-2 Read 7f75588f3000 1 pages
+[ff.run] (0.649s) criu> (00.147438)   1002: pr1002-2 Read 7f75588fb000 1 pages
+[ff.run] (0.649s) criu> (00.147444)   1002: pr1002-2 Read 7f75588fc000 1 pages
+[ff.run] (0.649s) criu> (00.147450)   1002: pr1002-2 Read 7f75588fd000 1 pages
+[ff.run] (0.649s) criu> (00.147455)   1002: pr1002-2 Read 7f75588fe000 2 pages
+[ff.run] (0.649s) criu> (00.147461)   1002: pr1002-2 Read 7f755892d000 1 pages
+[ff.run] (0.649s) criu> (00.147469)   1002: pr1002-2 Read 7f755892e000 1 pages
+[ff.run] (0.649s) criu> (00.147475)   1002: pr1002-2 Read 7f755892f000 1 pages
+[ff.run] (0.649s) criu> (00.147480)   1002: pr1002-2 Read 7f7558942000 3 pages
+[ff.run] (0.649s) criu> (00.147491)   1002: pr1002-2 Read 7f7558945000 1 pages
+[ff.run] (0.649s) criu> (00.147498)   1002: pr1002-2 Read 7ffff788d000 5 pages
+[ff.run] (0.649s) criu> (00.147509)   1002: pr1002-2 Read 7ffff79db000 2 pages
+[ff.run] (0.649s) criu> (00.147531)   1002: nr_restored_pages: 32808
+[ff.run] (0.649s) criu> (00.147533)   1002: nr_shared_pages:   0
+[ff.run] (0.649s) criu> (00.147534)   1002: nr_dropped_pages:   0
+[ff.run] (0.649s) criu> (00.147535)   1002: nr_lazy:           0
+[ff.run] (0.649s) criu> (00.147537)   1002: Restore on-core sigactions for 1002
+[ff.run] (0.649s) criu> (00.147590)   1002: Restoring children in alien sessions:
+[ff.run] (0.649s) criu> (00.147595)   1002: Restoring children in our session:
+[ff.run] (0.649s) criu> (00.147621)   1002: Restoring 1002 to 1 pgid
+[ff.run] (0.649s) criu> (00.147624)   1002: MYCOMMENT: finish getpgrp() with pgid 1
+[ff.run] (0.649s) criu> (00.147625)   1002: MYCOMMENT:From rstwc Finish  restore_pgid() for pid 1002
+[ff.run] (0.649s) criu> (00.147626)   1002: MYCOMMENT: From rstwc Enter restore_finish_stage for pid 1002
+[ff.run] (42.926s) criu> (42.425051)   1000: MYCOMMENT: From fork with pid call clone_n.., 1001
+[ff.run] (42.927s) criu> (42.425300)   1000: MYCOMMENT: From fork with pid finish clone_n., 1001 with ret=1001
+[ff.run] (42.927s) criu> (42.425313)   1000: MYCOMMENT: From fork_with_pid Enter case !(ca.clone_flags & CLONE_NEWPID) for 1001
+[ff.run] (42.927s) criu> (42.425318)   1000: MYCOMMENT: From fork_with_pid Enter case ca.core=True, for 1001
+[ff.run] (42.927s) criu> (42.425362)   1000: MYCOMMENT: End fork_with_pid for 1001
+[ff.run] (42.927s) criu> (42.425334)   1000: MYCOMMENT: Enter rtwc
+[ff.run] (42.927s) criu> (42.425389)   1000: Restoring 1000 to 1 pgid
+[ff.run] (42.927s) criu> (42.425392)   1000: MYCOMMENT: finish getpgrp() with pgid 1
+[ff.run] (42.927s) criu> (42.425393)   1000: MYCOMMENT:From rstwc Finish  restore_pgid() for pid 1000
+[ff.run] (42.927s) criu> (42.425394)   1000: MYCOMMENT: From rstwc current->parent = NULL for pid 1000
+[ff.run] (42.928s) criu> (42.426644)   1001: pr1001-2 Read 56263348a000 1 pages
+[ff.run] (42.928s) criu> (42.426814)   1001: pr1001-2 Read 56263348c000 1 pages
+[ff.run] (42.928s) criu> (42.426827)   1001: pr1001-2 Read 56263348d000 1 pages
+[ff.run] (42.928s) criu> (42.426837)   1001: pr1001-2 Read 562634477000 1 pages
+[ff.run] (42.928s) criu> (42.426846)   1001: pr1001-2 Read 7f539bf98000 255 pages
+[ff.run] (42.934s) criu> (42.432644)   1001: pr1001-2 Read 7f539c097000 256 pages
+[ff.run] (42.937s) criu> (42.435967)   1001: pr1001-2 Read 7f539c197000 256 pages
+[ff.run] (42.941s) criu> (42.439573)   1001: pr1001-2 Read 7f539c297000 256 pages
+[ff.run] (42.941s) criu> (42.440531)   1001: pr1001-2 Read 7f539c397000 256 pages
+[ff.run] (42.942s) criu> (42.441328)   1001: pr1001-2 Read 7f539c497000 256 pages
+[ff.run] (42.943s) criu> (42.442249)   1001: pr1001-2 Read 7f539c597000 256 pages
+[ff.run] (42.944s) criu> (42.443154)   1001: pr1001-2 Read 7f539c697000 256 pages
+[ff.run] (42.945s) criu> (42.443939)   1001: pr1001-2 Read 7f539c797000 256 pages
+[ff.run] (42.946s) criu> (42.444972)   1001: pr1001-2 Read 7f539c897000 256 pages
+[ff.run] (42.947s) criu> (42.445885)   1001: pr1001-2 Read 7f539c997000 256 pages
+[ff.run] (42.952s) criu> (42.451350)   1001: pr1001-2 Read 7f539ca97000 256 pages
+[ff.run] (42.953s) criu> (42.452171)   1001: pr1001-2 Read 7f539cb97000 256 pages
+[ff.run] (42.954s) criu> (42.452910)   1001: pr1001-2 Read 7f539cc97000 256 pages
+[ff.run] (42.955s) criu> (42.454056)   1001: pr1001-2 Read 7f539cd97000 256 pages
+[ff.run] (42.956s) criu> (42.454716)   1001: pr1001-2 Read 7f539ce97000 256 pages
+[ff.run] (42.956s) criu> (42.455429)   1001: pr1001-2 Read 7f539cf97000 256 pages
+[ff.run] (42.957s) criu> (42.456285)   1001: pr1001-2 Read 7f539d097000 256 pages
+[ff.run] (42.958s) criu> (42.456936)   1001: pr1001-2 Read 7f539d197000 256 pages
+[ff.run] (42.959s) criu> (42.457750)   1001: pr1001-2 Read 7f539d297000 256 pages
+[ff.run] (42.960s) criu> (42.458578)   1001: pr1001-2 Read 7f539d397000 256 pages
+[ff.run] (42.960s) criu> (42.459156)   1001: pr1001-2 Read 7f539d497000 256 pages
+[ff.run] (42.961s) criu> (42.459668)   1001: pr1001-2 Read 7f539d597000 256 pages
+[ff.run] (42.961s) criu> (42.460212)   1001: pr1001-2 Read 7f539d697000 256 pages
+[ff.run] (42.962s) criu> (42.460787)   1001: pr1001-2 Read 7f539d797000 256 pages
+[ff.run] (42.963s) criu> (42.461785)   1001: pr1001-2 Read 7f539d897000 256 pages
+[ff.run] (42.963s) criu> (42.462324)   1001: pr1001-2 Read 7f539d997000 256 pages
+[ff.run] (42.964s) criu> (42.462884)   1001: pr1001-2 Read 7f539da97000 256 pages
+[ff.run] (42.964s) criu> (42.463382)   1001: pr1001-2 Read 7f539db97000 256 pages
+[ff.run] (42.965s) criu> (42.463906)   1001: pr1001-2 Read 7f539dc97000 256 pages
+[ff.run] (42.966s) criu> (42.464620)   1001: pr1001-2 Read 7f539dd97000 256 pages
+[ff.run] (42.966s) criu> (42.465191)   1001: pr1001-2 Read 7f539de97000 256 pages
+[ff.run] (42.967s) criu> (42.465862)   1001: pr1001-2 Read 7f539df97000 256 pages
+[ff.run] (42.967s) criu> (42.466364)   1001: pr1001-2 Read 7f539e097000 256 pages
+[ff.run] (42.968s) criu> (42.466865)   1001: pr1001-2 Read 7f539e197000 256 pages
+[ff.run] (42.968s) criu> (42.467361)   1001: pr1001-2 Read 7f539e297000 256 pages
+[ff.run] (42.969s) criu> (42.467855)   1001: pr1001-2 Read 7f539e397000 256 pages
+[ff.run] (42.969s) criu> (42.468364)   1001: pr1001-2 Read 7f539e497000 256 pages
+[ff.run] (42.970s) criu> (42.468920)   1001: pr1001-2 Read 7f539e597000 256 pages
+[ff.run] (42.970s) criu> (42.469482)   1001: pr1001-2 Read 7f539e697000 256 pages
+[ff.run] (42.971s) criu> (42.470475)   1001: pr1001-2 Read 7f539e797000 256 pages
+[ff.run] (42.972s) criu> (42.471023)   1001: pr1001-2 Read 7f539e897000 256 pages
+[ff.run] (42.973s) criu> (42.472065)   1001: pr1001-2 Read 7f539e997000 256 pages
+[ff.run] (42.974s) criu> (42.472694)   1001: pr1001-2 Read 7f539ea97000 256 pages
+[ff.run] (42.978s) criu> (42.477431)   1001: pr1001-2 Read 7f539eb97000 256 pages
+[ff.run] (42.979s) criu> (42.478083)   1001: pr1001-2 Read 7f539ec97000 256 pages
+[ff.run] (42.980s) criu> (42.478710)   1001: pr1001-2 Read 7f539ed97000 256 pages
+[ff.run] (42.980s) criu> (42.479247)   1001: pr1001-2 Read 7f539ee97000 256 pages
+[ff.run] (42.981s) criu> (42.480181)   1001: pr1001-2 Read 7f539ef97000 256 pages
+[ff.run] (42.982s) criu> (42.481148)   1001: pr1001-2 Read 7f539f097000 256 pages
+[ff.run] (42.983s) criu> (42.481833)   1001: pr1001-2 Read 7f539f197000 256 pages
+[ff.run] (42.983s) criu> (42.482507)   1001: pr1001-2 Read 7f539f297000 256 pages
+[ff.run] (42.984s) criu> (42.483018)   1001: pr1001-2 Read 7f539f397000 256 pages
+[ff.run] (42.985s) criu> (42.483664)   1001: pr1001-2 Read 7f539f497000 256 pages
+[ff.run] (42.985s) criu> (42.484271)   1001: pr1001-2 Read 7f539f597000 256 pages
+[ff.run] (42.986s) criu> (42.484919)   1001: pr1001-2 Read 7f539f697000 256 pages
+[ff.run] (42.987s) criu> (42.485564)   1001: pr1001-2 Read 7f539f797000 256 pages
+[ff.run] (42.987s) criu> (42.486206)   1001: pr1001-2 Read 7f539f897000 256 pages
+[ff.run] (42.988s) criu> (42.486741)   1001: pr1001-2 Read 7f539f997000 256 pages
+[ff.run] (42.989s) criu> (42.487821)   1001: pr1001-2 Read 7f539fa97000 256 pages
+[ff.run] (42.989s) criu> (42.488468)   1001: pr1001-2 Read 7f539fb97000 256 pages
+[ff.run] (42.990s) criu> (42.489090)   1001: pr1001-2 Read 7f539fc97000 256 pages
+[ff.run] (42.991s) criu> (42.489862)   1001: pr1001-2 Read 7f539fd97000 256 pages
+[ff.run] (42.991s) criu> (42.490378)   1001: pr1001-2 Read 7f539fe97000 256 pages
+[ff.run] (42.992s) criu> (42.490897)   1001: pr1001-2 Read 7f539ff97000 256 pages
+[ff.run] (42.992s) criu> (42.491419)   1001: pr1001-2 Read 7f53a0097000 256 pages
+[ff.run] (42.993s) criu> (42.491934)   1001: pr1001-2 Read 7f53a0197000 256 pages
+[ff.run] (42.993s) criu> (42.492457)   1001: pr1001-2 Read 7f53a0297000 256 pages
+[ff.run] (42.994s) criu> (42.493050)   1001: pr1001-2 Read 7f53a0397000 256 pages
+[ff.run] (42.995s) criu> (42.494166)   1001: pr1001-2 Read 7f53a0497000 256 pages
+[ff.run] (42.996s) criu> (42.494787)   1001: pr1001-2 Read 7f53a0597000 256 pages
+[ff.run] (42.996s) criu> (42.495313)   1001: pr1001-2 Read 7f53a0697000 256 pages
+[ff.run] (42.997s) criu> (42.495841)   1001: pr1001-2 Read 7f53a0797000 256 pages
+[ff.run] (42.997s) criu> (42.496357)   1001: pr1001-2 Read 7f53a0897000 256 pages
+[ff.run] (42.998s) criu> (42.496866)   1001: pr1001-2 Read 7f53a0997000 256 pages
+[ff.run] (42.999s) criu> (42.497796)   1001: pr1001-2 Read 7f53a0a97000 256 pages
+[ff.run] (42.999s) criu> (42.498441)   1001: pr1001-2 Read 7f53a0b97000 256 pages
+[ff.run] (43.004s) criu> (42.503074)   1001: pr1001-2 Read 7f53a0c97000 256 pages
+[ff.run] (43.005s) criu> (42.503699)   1001: pr1001-2 Read 7f53a0d97000 256 pages
+[ff.run] (43.006s) criu> (42.504808)   1001: pr1001-2 Read 7f53a0e97000 256 pages
+[ff.run] (43.007s) criu> (42.505750)   1001: pr1001-2 Read 7f53a0f97000 256 pages
+[ff.run] (43.007s) criu> (42.506292)   1001: pr1001-2 Read 7f53a1097000 256 pages
+[ff.run] (43.008s) criu> (42.506897)   1001: pr1001-2 Read 7f53a1197000 256 pages
+[ff.run] (43.008s) criu> (42.507470)   1001: pr1001-2 Read 7f53a1297000 256 pages
+[ff.run] (43.009s) criu> (42.508333)   1001: pr1001-2 Read 7f53a1397000 256 pages
+[ff.run] (43.010s) criu> (42.509031)   1001: pr1001-2 Read 7f53a1497000 256 pages
+[ff.run] (43.011s) criu> (42.509840)   1001: pr1001-2 Read 7f53a1597000 256 pages
+[ff.run] (43.011s) criu> (42.510397)   1001: pr1001-2 Read 7f53a1697000 256 pages
+[ff.run] (43.012s) criu> (42.510931)   1001: pr1001-2 Read 7f53a1797000 256 pages
+[ff.run] (43.013s) criu> (42.511889)   1001: pr1001-2 Read 7f53a1897000 256 pages
+[ff.run] (43.013s) criu> (42.512416)   1001: pr1001-2 Read 7f53a1997000 256 pages
+[ff.run] (43.014s) criu> (42.512995)   1001: pr1001-2 Read 7f53a1a97000 256 pages
+[ff.run] (43.015s) criu> (42.513733)   1001: pr1001-2 Read 7f53a1b97000 256 pages
+[ff.run] (43.015s) criu> (42.514263)   1001: pr1001-2 Read 7f53a1c97000 256 pages
+[ff.run] (43.016s) criu> (42.514822)   1001: pr1001-2 Read 7f53a1d97000 256 pages
+[ff.run] (43.016s) criu> (42.515391)   1001: pr1001-2 Read 7f53a1e97000 256 pages
+[ff.run] (43.017s) criu> (42.515965)   1001: pr1001-2 Read 7f53a1f97000 256 pages
+[ff.run] (43.017s) criu> (42.516550)   1001: pr1001-2 Read 7f53a2097000 256 pages
+[ff.run] (43.018s) criu> (42.517167)   1001: pr1001-2 Read 7f53a2197000 256 pages
+[ff.run] (43.019s) criu> (42.518368)   1001: pr1001-2 Read 7f53a2297000 256 pages
+[ff.run] (43.020s) criu> (42.518933)   1001: pr1001-2 Read 7f53a2397000 256 pages
+[ff.run] (43.020s) criu> (42.519505)   1001: pr1001-2 Read 7f53a2497000 256 pages
+[ff.run] (43.021s) criu> (42.520051)   1001: pr1001-2 Read 7f53a2597000 256 pages
+[ff.run] (43.022s) criu> (42.520621)   1001: pr1001-2 Read 7f53a2697000 256 pages
+[ff.run] (43.022s) criu> (42.521349)   1001: pr1001-2 Read 7f53a2797000 256 pages
+[ff.run] (43.023s) criu> (42.522300)   1001: pr1001-2 Read 7f53a2897000 256 pages
+[ff.run] (43.024s) criu> (42.522876)   1001: pr1001-2 Read 7f53a2997000 256 pages
+[ff.run] (43.025s) criu> (42.523697)   1001: pr1001-2 Read 7f53a2a97000 256 pages
+[ff.run] (43.025s) criu> (42.524455)   1001: pr1001-2 Read 7f53a2b97000 256 pages
+[ff.run] (43.032s) criu> (42.530164)   1001: pr1001-2 Read 7f53a2c97000 256 pages
+[ff.run] (43.032s) criu> (42.530596)   1001: pr1001-2 Read 7f53a2d97000 256 pages
+[ff.run] (43.032s) criu> (42.531089)   1001: pr1001-2 Read 7f53a2e97000 256 pages
+[ff.run] (43.033s) criu> (42.532153)   1001: pr1001-2 Read 7f53a2f97000 256 pages
+[ff.run] (43.034s) criu> (42.532893)   1001: pr1001-2 Read 7f53a3097000 256 pages
+[ff.run] (43.035s) criu> (42.533720)   1001: pr1001-2 Read 7f53a3197000 256 pages
+[ff.run] (43.035s) criu> (42.534451)   1001: pr1001-2 Read 7f53a3297000 256 pages
+[ff.run] (43.036s) criu> (42.535240)   1001: pr1001-2 Read 7f53a3397000 256 pages
+[ff.run] (43.037s) criu> (42.535922)   1001: pr1001-2 Read 7f53a3497000 256 pages
+[ff.run] (43.038s) criu> (42.536863)   1001: pr1001-2 Read 7f53a3597000 256 pages
+[ff.run] (43.039s) criu> (42.537922)   1001: pr1001-2 Read 7f53a3697000 256 pages
+[ff.run] (43.040s) criu> (42.538998)   1001: pr1001-2 Read 7f53a3797000 256 pages
+[ff.run] (43.041s) criu> (42.539703)   1001: pr1001-2 Read 7f53a3897000 256 pages
+[ff.run] (43.041s) criu> (42.540417)   1001: pr1001-2 Read 7f53a3997000 256 pages
+[ff.run] (43.042s) criu> (42.541159)   1001: pr1001-2 Read 7f53a3a97000 256 pages
+[ff.run] (43.043s) criu> (42.541903)   1001: pr1001-2 Read 7f53a3b97000 256 pages
+[ff.run] (43.044s) criu> (42.542762)   1001: pr1001-2 Read 7f53a3c97000 256 pages
+[ff.run] (43.044s) criu> (42.543413)   1001: pr1001-2 Read 7f53a3d97000 256 pages
+[ff.run] (43.045s) criu> (42.544078)   1001: pr1001-2 Read 7f53a3e97000 256 pages
+[ff.run] (43.046s) criu> (42.545114)   1001: pr1001-2 Read 7f53a3f97000 2 pages
+[ff.run] (43.046s) criu> (42.545156)   1001: pr1001-2 Read 7f53a7f9a000 2 pages
+[ff.run] (43.048s) criu> (42.545171)   1001: pr1001-2 Read 7f53a7fb9000 1 pages
+[ff.run] (43.048s) criu> (42.545186)   1001: pr1001-2 Read 7f53a7fba000 1 pages
+[ff.run] (43.048s) criu> (42.546242)   1001: pr1001-2 Read 7f53a7fbe000 1 pages
+[ff.run] (43.048s) criu> (42.546250)   1001: pr1001-2 Read 7f53a7fc3000 1 pages
+[ff.run] (43.048s) criu> (42.546255)   1001: pr1001-2 Read 7f53a7fc4000 1 pages
+[ff.run] (43.048s) criu> (42.546261)   1001: pr1001-2 Read 7f53a81ad000 4 pages
+[ff.run] (43.048s) criu> (42.546960)   1001: pr1001-2 Read 7f53a81b1000 2 pages
+[ff.run] (43.048s) criu> (42.547036)   1001: pr1001-2 Read 7f53a81b3000 2 pages
+[ff.run] (43.048s) criu> (42.547092)   1001: pr1001-2 Read 7f53a81b6000 1 pages
+[ff.run] (43.049s) criu> (42.547583)   1001: pr1001-2 Read 7f53a81be000 1 pages
+[ff.run] (43.049s) criu> (42.547724)   1001: pr1001-2 Read 7f53a81bf000 1 pages
+[ff.run] (43.049s) criu> (42.548086)   1001: pr1001-2 Read 7f53a81c0000 1 pages
+[ff.run] (43.049s) criu> (42.548216)   1001: pr1001-2 Read 7f53a81c1000 2 pages
+[ff.run] (43.049s) criu> (42.548365)   1001: pr1001-2 Read 7f53a81f0000 1 pages
+[ff.run] (43.049s) criu> (42.548552)   1001: pr1001-2 Read 7f53a81f1000 1 pages
+[ff.run] (43.050s) criu> (42.548700)   1001: pr1001-2 Read 7f53a81f2000 1 pages
+[ff.run] (43.050s) criu> (42.548866)   1001: pr1001-2 Read 7f53a8205000 3 pages
+[ff.run] (43.050s) criu> (42.549090)   1001: pr1001-2 Read 7f53a8208000 1 pages
+[ff.run] (43.050s) criu> (42.549471)   1001: pr1001-2 Read 7ffcaf418000 5 pages
+[ff.run] (43.051s) criu> (42.549603)   1001: pr1001-2 Read 7ffcaf49c000 2 pages
+[ff.run] (43.051s) criu> (42.550054)   1001: nr_restored_pages: 32808
+[ff.run] (43.051s) criu> (42.550276)   1001: nr_shared_pages:   0
+[ff.run] (43.052s) criu> (42.550404)   1001: nr_dropped_pages:   0
+[ff.run] (43.052s) criu> (42.550739)   1001: nr_lazy:           0
+[ff.run] (43.052s) criu> (42.550889)   1001: Restore on-core sigactions for 1001
+[ff.run] (43.052s) criu> (42.551186)   1001: Restoring children in alien sessions:
+[ff.run] (43.052s) criu> (42.551477)   1001: Restoring children in our session:
+[ff.run] (43.053s) criu> (42.551815)   1001: Restoring 1001 to 1 pgid
+[ff.run] (43.053s) criu> (42.551938)   1001: MYCOMMENT: finish getpgrp() with pgid 1
+[ff.run] (43.053s) criu> (42.552292)   1001: MYCOMMENT:From rstwc Finish  restore_pgid() for pid 1001
+[ff.run] (43.053s) criu> (42.552318)   1001: MYCOMMENT: From rstwc Enter restore_finish_stage for pid 1001
+[ff.run] (43.054s) criu> (42.552827)   1000: Restoring resources
+[ff.run] (43.054s) criu> (42.552853)   1000: Opening fdinfo-s
+[ff.run] (43.054s) criu> (42.552856)   1000: tty: open driver ext id 0x9 index 1012 (master 0 sid 1 pgrp 1 inherit 1)
+[ff.run] (43.054s) criu> (42.552793)   1002: MYCOMMENT: From rstwc rfs >=0 for pid 1002
+[ff.run] (43.054s) criu> (42.552864)   1002: Restoring resources
+[ff.run] (43.054s) criu> (42.552873)   1000: File tty[8800:44] will be restored from fd 0 dumped from inherit fd 0
+[ff.run] (43.054s) criu> (42.552885)   1000: 		Create fd for 0
+[ff.run] (43.054s) criu> (42.552886)   1002: Opening fdinfo-s
+[ff.run] (43.054s) criu> (42.552887)   1000: 			Going to dup 0 into 1
+[ff.run] (43.054s) criu> (42.552889)   1000: 			Going to dup 0 into 2
+[ff.run] (43.054s) criu> (42.552891)   1000: 		Send fd 0 to /crtools-fd-1001
+[ff.run] (43.054s) criu> (42.552900)   1000: 		Send fd 0 to /crtools-fd-1001
+[ff.run] (43.055s) criu> (42.552904)   1000: 		Send fd 0 to /crtools-fd-1002
+[ff.run] (43.055s) criu> (42.552907)   1002: 		Create fd for 0
+[ff.run] (43.055s) criu> (42.552908)   1000: 		Send fd 0 to /crtools-fd-1002
+[ff.run] (43.055s) criu> (42.552909)   1002: 	Receive fd for 1
+[ff.run] (43.055s) criu> (42.552912)   1000: 	Receive fd for 1
+[ff.run] (43.055s) criu> (42.552913)   1000: 	Receive fd for 2
+[ff.run] (43.055s) criu> (42.552914)   1002: Further fle=0x7efc062f1d80, pid=1002
+[ff.run] (43.055s) criu> (42.552916)   1002: 	Receive fd for 2
+[ff.run] (43.055s) criu> (42.552918)   1002: Further fle=0x7efc062f1dc0, pid=1002
+[ff.run] (43.055s) criu> (42.552921)   1002: Opening 0x007f75546d6000-0x007f75586d7000 0000000000000000 (81) vma
+[ff.run] (43.055s) criu> (42.552943)   1000: 		Create fd for 10
+[ff.run] (43.055s) criu> (42.552947)   1000: Opening 0x007efdbc71a000-0x007efdc071b000 0000000000000000 (81) vma
+[ff.run] (43.055s) criu> (42.552968)   1002: Restore via sigreturn
+[ff.run] (43.055s) criu> (42.552983)   1000: Restore via sigreturn
+[ff.run] (43.055s) criu> (42.554118)   1001: MYCOMMENT: From rstwc rfs >=0 for pid 1001
+[ff.run] (43.055s) criu> (42.554125)   1002: 1 threads require 104K of memory
+[ff.run] (43.055s) criu> (42.554128)   1002: Found bootstrap VMA hint at: 0x10000 (needs ~128K)
+[ff.run] (43.055s) criu> (42.554159)   1001: Restoring resources
+[ff.run] (43.055s) criu> (42.554192)   1001: Opening fdinfo-s
+[ff.run] (43.055s) criu> (42.554212)   1002: Thread    0 stack  0x1b080 rt_sigframe  0x23080
+[ff.run] (43.055s) criu> (42.554239)   1002: Restoring umask to 22
+[ff.run] (43.055s) criu> (42.554242)   1001: 		Create fd for 0
+[ff.run] (43.055s) criu> (42.554295)   1002: Dismissing the image streamer
+[ff.run] (43.055s) criu> (42.554324)   1002: task_args: 0x25000
+[ff.run] (43.055s) criu> task_args->pid: 1002
+[ff.run] (43.055s) criu> task_args->nr_threads: 1
+[ff.run] (43.055s) criu> task_args->clone_restore_fn: 0x119f0
+[ff.run] (43.055s) criu> task_args->thread_args: 0x25540
+[ff.run] (43.055s) criu> (42.554330) pie: 1002: Switched to the restorer 1002
+[ff.run] (43.055s) criu> (42.554423)   1001: 	Receive fd for 1
+[ff.run] (43.055s) criu> (42.554454)   1001: Further fle=0x7efc062f1e40, pid=1001
+[ff.run] (43.055s) criu> (42.554476)   1001: 	Receive fd for 2
+[ff.run] (43.055s) criu> (42.554501)   1001: Further fle=0x7efc062f1e80, pid=1001
+[ff.run] (43.055s) criu> (42.554523)   1001: Opening 0x007f53a3f99000-0x007f53a7f9a000 0000000000000000 (81) vma
+[ff.run] (43.056s) criu> (42.554551) pie: 1002: vdso: Using gettimeofday() on vdso at 0x2ec50
+[ff.run] (43.056s) criu> (42.554584) pie: 1002: Remap 0x7efbfdae0000->0x55a00d6e2000 len 0x1000
+[ff.run] (43.056s) criu> (42.554604) pie: 1002: Remap 0x7efbfdae1000->0x55a00d6e3000 len 0x1000
+[ff.run] (43.056s) criu> (42.554612) pie: 1002: Remap 0x7efbfdae2000->0x55a00d6e4000 len 0x1000
+[ff.run] (43.056s) criu> (42.554619) pie: 1002: Remap 0x7efbfdae3000->0x55a00d6e5000 len 0x1000
+[ff.run] (43.056s) criu> (42.554627) pie: 1002: Remap 0x7efbfdae4000->0x55a00d6e6000 len 0x1000
+[ff.run] (43.056s) criu> (42.554636) pie: 1002: Remap 0x7efbfdae5000->0x55a00ead8000 len 0x21000
+[ff.run] (43.056s) criu> (42.554656) pie: 1002: Remap 0x7efc05d97000->0x7ffff79db000 len 0x2000
+[ff.run] (43.056s) criu> (42.554666) pie: 1002: Remap 0x7efc05d93000->0x7ffff79d7000 len 0x4000
+[ff.run] (43.056s) criu> (42.554672) pie: 1002: Remap 0x7efc05d72000->0x7ffff7871000 len 0x21000
+[ff.run] (43.056s) criu> (42.554686) pie: 1002: Remap 0x7efc05d71000->0x7f7558945000 len 0x1000
+[ff.run] (43.056s) criu> (42.554698) pie: 1002: Remap 0x7efc05d6e000->0x7f7558942000 len 0x3000
+[ff.run] (43.056s) criu> (42.554708) pie: 1002: Remap 0x7efc05d6b000->0x7f755893f000 len 0x3000
+[ff.run] (43.056s) criu> (42.554715) pie: 1002: Remap 0x7efc05d5e000->0x7f7558932000 len 0xd000
+[ff.run] (43.056s) criu> (42.554722) pie: 1002: Remap 0x7efc05d5c000->0x7f7558930000 len 0x2000
+[ff.run] (43.056s) criu> (42.554728) pie: 1002: Remap 0x7efc05d5b000->0x7f755892f000 len 0x1000
+[ff.run] (43.056s) criu> (42.554734) pie: 1002: Remap 0x7efc05d5a000->0x7f755892e000 len 0x1000
+[ff.run] (43.056s) criu> (42.554741) pie: 1002: Remap 0x7efc05d59000->0x7f755892d000 len 0x1000
+[ff.run] (43.056s) criu> (42.554748) pie: 1002: Remap 0x7efc05d58000->0x7f755892c000 len 0x1000
+[ff.run] (43.056s) criu> (42.554754) pie: 1002: Remap 0x7efc05d50000->0x7f7558924000 len 0x8000
+[ff.run] (43.056s) criu> (42.554760) pie: 1002: Remap 0x7efc05d2d000->0x7f7558901000 len 0x23000
+[ff.run] (43.056s) criu> (42.554765) pie: 1002: Remap 0x7efc05d2c000->0x7f7558900000 len 0x1000
+[ff.run] (43.056s) criu> (42.554769) pie: 1002: Remap 0x7efc05d2a000->0x7f75588fe000 len 0x2000
+[ff.run] (43.056s) criu> (42.554775) pie: 1002: Remap 0x7efc05d29000->0x7f75588fd000 len 0x1000
+[ff.run] (43.056s) criu> (42.554783) pie: 1002: Remap 0x7efc05d28000->0x7f75588fc000 len 0x1000
+[ff.run] (43.056s) criu> (42.554790) pie: 1002: Remap 0x7efc05d27000->0x7f75588fb000 len 0x1000
+[ff.run] (43.056s) criu> (42.554797) pie: 1002: Remap 0x7efc05d26000->0x7f75588fa000 len 0x1000
+[ff.run] (43.056s) criu> (42.554802) pie: 1002: Remap 0x7efc05d25000->0x7f75588f9000 len 0x1000
+[ff.run] (43.056s) criu> (42.554808) pie: 1002: Remap 0x7efc05d24000->0x7f75588f8000 len 0x1000
+[ff.run] (43.056s) criu> (42.554812) pie: 1002: Remap 0x7efc05d20000->0x7f75588f0000 len 0x4000
+[ff.run] (43.056s) criu> (42.554818) pie: 1002: Remap 0x7efc05d1e000->0x7f75588ee000 len 0x2000
+[ff.run] (43.056s) criu> (42.554825) pie: 1002: Remap 0x7efc05d1a000->0x7f75588ea000 len 0x4000
+[ff.run] (43.056s) criu> (42.554833) pie: 1002: Remap 0x7efc05ccc000->0x7f755889c000 len 0x4e000
+[ff.run] (43.056s) criu> (42.554838) pie: 1002: Remap 0x7efc05b54000->0x7f7558724000 len 0x178000
+[ff.run] (43.056s) criu> (42.554846) pie: 1002: Remap 0x7efc05b32000->0x7f7558702000 len 0x22000
+[ff.run] (43.056s) criu> (42.554854) pie: 1002: Remap 0x7efc05b31000->0x7f7558701000 len 0x1000
+[ff.run] (43.056s) criu> (42.554862) pie: 1002: Remap 0x7efc05b30000->0x7f7558700000 len 0x1000
+[ff.run] (43.056s) criu> (42.554869) pie: 1002: Remap 0x7efc05b2f000->0x7f75586ff000 len 0x1000
+[ff.run] (43.056s) criu> (42.554875) pie: 1002: Remap 0x7efc05b2d000->0x7f75586fd000 len 0x2000
+[ff.run] (43.056s) criu> (42.554879) pie: 1002: Remap 0x7efc05b2c000->0x7f75586fc000 len 0x1000
+[ff.run] (43.056s) criu> (42.554883) pie: 1002: Remap 0x7efc05b28000->0x7f75586f8000 len 0x4000
+[ff.run] (43.056s) criu> (42.554890) pie: 1002: Remap 0x7efc05b27000->0x7f75586f7000 len 0x1000
+[ff.run] (43.056s) criu> (42.554897) pie: 1002: Remap 0x7efc05b26000->0x7f75586f6000 len 0x1000
+[ff.run] (43.056s) criu> (42.554903) pie: 1002: Remap 0x7efc05b20000->0x7f75586f0000 len 0x6000
+[ff.run] (43.056s) criu> (42.554908) pie: 1002: Remap 0x7efc05b0f000->0x7f75586df000 len 0x11000
+[ff.run] (43.056s) criu> (42.554912) pie: 1002: Remap 0x7efc05b09000->0x7f75586d9000 len 0x6000
+[ff.run] (43.056s) criu> (42.554917) pie: 1002: Remap 0x7efc05b07000->0x7f75586d7000 len 0x2000
+[ff.run] (43.056s) criu> (42.554925) pie: 1002: Remap 0x7efbfdb06000->0x7f754c6d5000 len 0x8001000
+[ff.run] (43.056s) criu> (42.555013)   1001: Restore via sigreturn
+[ff.run] (43.056s) criu> (42.555148)   1001: 1 threads require 104K of memory
+[ff.run] (43.056s) criu> (42.555175)   1001: Found bootstrap VMA hint at: 0x10000 (needs ~128K)
+[ff.run] (43.056s) criu> (42.555251) pie: 1002: vdso: Runtime vdso/vvar matches dumpee, remap inplace
+[ff.run] (43.056s) criu> (42.555440)   1001: Thread    0 stack  0x1b080 rt_sigframe  0x23080
+[ff.run] (43.056s) criu> (42.555443) pie: 1002: vdso: Using gettimeofday() on vdso at 0x7ffff79dbc50
+[ff.run] (43.056s) criu> (42.555493)   1001: Restoring umask to 22
+[ff.run] (43.056s) criu> (42.555503) pie: 1002: Failed to set /proc/self/exe link (ret=-1), proceeding anyways
+[ff.run] (43.056s) criu> (42.555508) pie: 1002: Restoring scheduler params 0.0.0
+[ff.run] (43.056s) criu> (42.555521) pie: 1002: 1002: Restored
+[ff.run] (43.057s) criu> (42.556037)   1001: Dismissing the image streamer
+[ff.run] (43.057s) criu> (42.556138)   1001: task_args: 0x25000
+[ff.run] (43.057s) criu> task_args->pid: 1001
+[ff.run] (43.057s) criu> task_args->nr_threads: 1
+[ff.run] (43.057s) criu> task_args->clone_restore_fn: 0x119f0
+[ff.run] (43.057s) criu> task_args->thread_args: 0x25540
+[ff.run] (43.058s) criu> (42.556604) pie: 1001: Switched to the restorer 1001
+[ff.run] (43.058s) criu> (42.556834) pie: 1001: vdso: Using gettimeofday() on vdso at 0x2ec50
+[ff.run] (43.058s) criu> (42.556912) pie: 1001: Remap 0x7efbfdae0000->0x562633489000 len 0x1000
+[ff.run] (43.058s) criu> (42.557019) pie: 1001: Remap 0x7efbfdae1000->0x56263348a000 len 0x1000
+[ff.run] (43.058s) criu> (42.557229) pie: 1001: Remap 0x7efbfdae2000->0x56263348b000 len 0x1000
+[ff.run] (43.058s) criu> (42.557523) pie: 1001: Remap 0x7efbfdae3000->0x56263348c000 len 0x1000
+[ff.run] (43.059s) criu> (42.557654) pie: 1001: Remap 0x7efbfdae4000->0x56263348d000 len 0x1000
+[ff.run] (43.059s) criu> (42.557920) pie: 1001: Remap 0x7efbfdae5000->0x562634477000 len 0x21000
+[ff.run] (43.059s) criu> (42.558238) pie: 1001: Remap 0x7efc05d97000->0x7ffcaf49c000 len 0x2000
+[ff.run] (43.059s) criu> (42.558381) pie: 1001: Remap 0x7efc05d93000->0x7ffcaf498000 len 0x4000
+[ff.run] (43.059s) criu> (42.558471) pie: 1001: Remap 0x7efc05d72000->0x7ffcaf3fc000 len 0x21000
+[ff.run] (43.060s) criu> (42.558691) pie: 1001: Remap 0x7efc05d71000->0x7f53a8208000 len 0x1000
+[ff.run] (43.060s) criu> (42.558951) pie: 1001: Remap 0x7efc05d6e000->0x7f53a8205000 len 0x3000
+[ff.run] (43.060s) criu> (42.559096) pie: 1001: Remap 0x7efc05d6b000->0x7f53a8202000 len 0x3000
+[ff.run] (43.060s) criu> (42.559193) pie: 1001: Remap 0x7efc05d5e000->0x7f53a81f5000 len 0xd000
+[ff.run] (43.060s) criu> (42.559394) pie: 1001: Remap 0x7efc05d5c000->0x7f53a81f3000 len 0x2000
+[ff.run] (43.061s) criu> (42.559651) pie: 1001: Remap 0x7efc05d5b000->0x7f53a81f2000 len 0x1000
+[ff.run] (43.061s) criu> (42.559796) pie: 1001: Remap 0x7efc05d5a000->0x7f53a81f1000 len 0x1000
+[ff.run] (43.061s) criu> (42.559893) pie: 1001: Remap 0x7efc05d59000->0x7f53a81f0000 len 0x1000
+[ff.run] (43.061s) criu> (42.560194) pie: 1001: Remap 0x7efc05d58000->0x7f53a81ef000 len 0x1000
+[ff.run] (43.061s) criu> (42.560453) pie: 1001: Remap 0x7efc05d50000->0x7f53a81e7000 len 0x8000
+[ff.run] (43.062s) criu> (42.560589) pie: 1001: Remap 0x7efc05d2d000->0x7f53a81c4000 len 0x23000
+[ff.run] (43.062s) criu> (42.560686) pie: 1001: Remap 0x7efc05d2c000->0x7f53a81c3000 len 0x1000
+[ff.run] (43.063s) criu> (42.560893) pie: 1001: Remap 0x7efc05d2a000->0x7f53a81c1000 len 0x2000
+[ff.run] (43.064s) criu> (42.560905) pie: 1001: Remap 0x7efc05d29000->0x7f53a81c0000 len 0x1000
+[ff.run] (43.064s) criu> (42.560914) pie: 1001: Remap 0x7efc05d28000->0x7f53a81bf000 len 0x1000
+[ff.run] (43.064s) criu> (42.560922) pie: 1001: Remap 0x7efc05d27000->0x7f53a81be000 len 0x1000
+[ff.run] (43.064s) criu> (42.560929) pie: 1001: Remap 0x7efc05d26000->0x7f53a81bd000 len 0x1000
+[ff.run] (43.064s) criu> (42.560935) pie: 1001: Remap 0x7efc05d25000->0x7f53a81bc000 len 0x1000
+[ff.run] (43.064s) criu> (42.560940) pie: 1001: Remap 0x7efc05d24000->0x7f53a81bb000 len 0x1000
+[ff.run] (43.064s) criu> (42.560945) pie: 1001: Remap 0x7efc05d20000->0x7f53a81b3000 len 0x4000
+[ff.run] (43.064s) criu> (42.560952) pie: 1001: Remap 0x7efc05d1e000->0x7f53a81b1000 len 0x2000
+[ff.run] (43.064s) criu> (42.560960) pie: 1001: Remap 0x7efc05d1a000->0x7f53a81ad000 len 0x4000
+[ff.run] (43.064s) criu> (42.560967) pie: 1001: Remap 0x7efc05ccc000->0x7f53a815f000 len 0x4e000
+[ff.run] (43.064s) criu> (42.560974) pie: 1001: Remap 0x7efc05b54000->0x7f53a7fe7000 len 0x178000
+[ff.run] (43.064s) criu> (42.560991) pie: 1001: Remap 0x7efc05b32000->0x7f53a7fc5000 len 0x22000
+[ff.run] (43.064s) criu> (42.561001) pie: 1001: Remap 0x7efc05b31000->0x7f53a7fc4000 len 0x1000
+[ff.run] (43.064s) criu> (42.561010) pie: 1001: Remap 0x7efc05b30000->0x7f53a7fc3000 len 0x1000
+[ff.run] (43.064s) criu> (42.561017) pie: 1001: Remap 0x7efc05b2f000->0x7f53a7fc2000 len 0x1000
+[ff.run] (43.064s) criu> (42.561022) pie: 1001: Remap 0x7efc05b2d000->0x7f53a7fc0000 len 0x2000
+[ff.run] (43.064s) criu> (42.561027) pie: 1001: Remap 0x7efc05b2c000->0x7f53a7fbf000 len 0x1000
+[ff.run] (43.064s) criu> (42.561032) pie: 1001: Remap 0x7efc05b28000->0x7f53a7fbb000 len 0x4000
+[ff.run] (43.064s) criu> (42.561038) pie: 1001: Remap 0x7efc05b27000->0x7f53a7fba000 len 0x1000
+[ff.run] (43.064s) criu> (42.561045) pie: 1001: Remap 0x7efc05b26000->0x7f53a7fb9000 len 0x1000
+[ff.run] (43.064s) criu> (42.561052) pie: 1001: Remap 0x7efc05b20000->0x7f53a7fb3000 len 0x6000
+[ff.run] (43.064s) criu> (42.561057) pie: 1001: Remap 0x7efc05b0f000->0x7f53a7fa2000 len 0x11000
+[ff.run] (43.064s) criu> (42.561063) pie: 1001: Remap 0x7efc05b09000->0x7f53a7f9c000 len 0x6000
+[ff.run] (43.065s) criu> (42.561069) pie: 1001: Remap 0x7efc05b07000->0x7f53a7f9a000 len 0x2000
+[ff.run] (43.065s) criu> (42.561078) pie: 1001: Remap 0x7efbfdb06000->0x7f539bf98000 len 0x8001000
+[ff.run] (43.065s) criu> (42.561405) pie: 1001: vdso: Runtime vdso/vvar matches dumpee, remap inplace
+[ff.run] (43.065s) criu> (42.561432) pie: 1001: vdso: Using gettimeofday() on vdso at 0x7ffcaf49cc50
+[ff.run] (43.065s) criu> (42.561488) pie: 1001: Failed to set /proc/self/exe link (ret=-1), proceeding anyways
+[ff.run] (43.065s) criu> (42.561494) pie: 1001: Restoring scheduler params 0.0.0
+[ff.run] (43.065s) criu> (42.561505) pie: 1001: 1001: Restored
+[ff.run] (43.065s) criu> (42.561602)   1000: 1 threads require 104K of memory
+[ff.run] (43.065s) criu> (42.561605)   1000: Found bootstrap VMA hint at: 0x10000 (needs ~128K)
+[ff.run] (43.065s) criu> (42.561667)   1000: Thread    0 stack  0x1b080 rt_sigframe  0x23080
+[ff.run] (43.065s) criu> (42.561687)   1000: Restoring umask to 22
+[ff.run] (43.065s) criu> (42.561691)   1000: Dismissing the image streamer
+[ff.run] (43.065s) criu> (42.561703)   1000: task_args: 0x25000
+[ff.run] (43.065s) criu> task_args->pid: 1000
+[ff.run] (43.065s) criu> task_args->nr_threads: 1
+[ff.run] (43.065s) criu> task_args->clone_restore_fn: 0x119f0
+[ff.run] (43.065s) criu> task_args->thread_args: 0x25540
+[ff.run] (43.065s) criu> (42.561707) pie: 1000: Switched to the restorer 1000
+[ff.run] (43.065s) criu> (42.561829) pie: 1000: vdso: Using gettimeofday() on vdso at 0x2ec50
+[ff.run] (43.065s) criu> (42.561835) pie: 1000: Remap 0x7efc05d99000->0x55db5f6a4000 len 0x5000
+[ff.run] (43.065s) criu> (42.561844) pie: 1000: Remap 0x7efc05d9e000->0x55db5f6a9000 len 0x13000
+[ff.run] (43.065s) criu> (42.561854) pie: 1000: Remap 0x7efc05db1000->0x55db5f6bc000 len 0x6000
+[ff.run] (43.065s) criu> (42.561861) pie: 1000: Remap 0x7efc05db7000->0x55db5f6c2000 len 0x2000
+[ff.run] (43.066s) criu> (42.561869) pie: 1000: Remap 0x7efc05db9000->0x55db5f6c4000 len 0x1000
+[ff.run] (43.066s) criu> (42.561876) pie: 1000: Remap 0x7efc05dba000->0x55db5f6c5000 len 0x2000
+[ff.run] (43.066s) criu> (42.561887) pie: 1000: Remap 0x7efc05dbc000->0x55db60b65000 len 0x21000
+[ff.run] (43.066s) criu> (42.561905) pie: 1000: Remap 0x7efc0606d000->0x7ffe6b1f2000 len 0x2000
+[ff.run] (43.066s) criu> (42.561914) pie: 1000: Remap 0x7efc06069000->0x7ffe6b1ee000 len 0x4000
+[ff.run] (43.066s) criu> (42.561920) pie: 1000: Remap 0x7efc06048000->0x7ffe6b197000 len 0x21000
+[ff.run] (43.066s) criu> (42.561933) pie: 1000: Remap 0x7efc06047000->0x7efdc0989000 len 0x1000
+[ff.run] (43.066s) criu> (42.561943) pie: 1000: Remap 0x7efc06044000->0x7efdc0986000 len 0x3000
+[ff.run] (43.066s) criu> (42.561954) pie: 1000: Remap 0x7efc06041000->0x7efdc0983000 len 0x3000
+[ff.run] (43.066s) criu> (42.561960) pie: 1000: Remap 0x7efc06034000->0x7efdc0976000 len 0xd000
+[ff.run] (43.066s) criu> (42.561964) pie: 1000: Remap 0x7efc06032000->0x7efdc0974000 len 0x2000
+[ff.run] (43.066s) criu> (42.561969) pie: 1000: Remap 0x7efc06031000->0x7efdc0973000 len 0x1000
+[ff.run] (43.066s) criu> (42.561974) pie: 1000: Remap 0x7efc06030000->0x7efdc0972000 len 0x1000
+[ff.run] (43.066s) criu> (42.561982) pie: 1000: Remap 0x7efc0602f000->0x7efdc0971000 len 0x1000
+[ff.run] (43.066s) criu> (42.561989) pie: 1000: Remap 0x7efc0602e000->0x7efdc0970000 len 0x1000
+[ff.run] (43.066s) criu> (42.561997) pie: 1000: Remap 0x7efc06026000->0x7efdc0968000 len 0x8000
+[ff.run] (43.067s) criu> (42.562003) pie: 1000: Remap 0x7efc06003000->0x7efdc0945000 len 0x23000
+[ff.run] (43.067s) criu> (42.562008) pie: 1000: Remap 0x7efc06002000->0x7efdc0944000 len 0x1000
+[ff.run] (43.067s) criu> (42.562013) pie: 1000: Remap 0x7efc06000000->0x7efdc0942000 len 0x2000
+[ff.run] (43.067s) criu> (42.562020) pie: 1000: Remap 0x7efc05fff000->0x7efdc0941000 len 0x1000
+[ff.run] (43.067s) criu> (42.562029) pie: 1000: Remap 0x7efc05ffe000->0x7efdc0940000 len 0x1000
+[ff.run] (43.067s) criu> (42.562038) pie: 1000: Remap 0x7efc05ffd000->0x7efdc093f000 len 0x1000
+[ff.run] (43.067s) criu> (42.562046) pie: 1000: Remap 0x7efc05ffc000->0x7efdc093e000 len 0x1000
+[ff.run] (43.067s) criu> (42.562051) pie: 1000: Remap 0x7efc05ffb000->0x7efdc093d000 len 0x1000
+[ff.run] (43.067s) criu> (42.562055) pie: 1000: Remap 0x7efc05ffa000->0x7efdc093c000 len 0x1000
+[ff.run] (43.067s) criu> (42.562059) pie: 1000: Remap 0x7efc05ff6000->0x7efdc0934000 len 0x4000
+[ff.run] (43.067s) criu> (42.562065) pie: 1000: Remap 0x7efc05ff4000->0x7efdc0932000 len 0x2000
+[ff.run] (43.067s) criu> (42.562073) pie: 1000: Remap 0x7efc05ff0000->0x7efdc092e000 len 0x4000
+[ff.run] (43.067s) criu> (42.562080) pie: 1000: Remap 0x7efc05fa2000->0x7efdc08e0000 len 0x4e000
+[ff.run] (43.067s) criu> (42.562086) pie: 1000: Remap 0x7efc05e2a000->0x7efdc0768000 len 0x178000
+[ff.run] (43.067s) criu> (42.562092) pie: 1000: Remap 0x7efc05e08000->0x7efdc0746000 len 0x22000
+[ff.run] (43.068s) criu> (42.562098) pie: 1000: Remap 0x7efc05e07000->0x7efdc0745000 len 0x1000
+[ff.run] (43.068s) criu> (42.562104) pie: 1000: Remap 0x7efc05e06000->0x7efdc0744000 len 0x1000
+[ff.run] (43.068s) criu> (42.562111) pie: 1000: Remap 0x7efc05e05000->0x7efdc0743000 len 0x1000
+[ff.run] (43.068s) criu> (42.562117) pie: 1000: Remap 0x7efc05e03000->0x7efdc0741000 len 0x2000
+[ff.run] (43.068s) criu> (42.562121) pie: 1000: Remap 0x7efc05e02000->0x7efdc0740000 len 0x1000
+[ff.run] (43.068s) criu> (42.562125) pie: 1000: Remap 0x7efc05dfe000->0x7efdc073c000 len 0x4000
+[ff.run] (43.068s) criu> (42.562133) pie: 1000: Remap 0x7efc05dfd000->0x7efdc073b000 len 0x1000
+[ff.run] (43.068s) criu> (42.562140) pie: 1000: Remap 0x7efc05dfc000->0x7efdc073a000 len 0x1000
+[ff.run] (43.068s) criu> (42.562148) pie: 1000: Remap 0x7efc05df6000->0x7efdc0734000 len 0x6000
+[ff.run] (43.068s) criu> (42.562155) pie: 1000: Remap 0x7efc05de5000->0x7efdc0723000 len 0x11000
+[ff.run] (43.068s) criu> (42.562160) pie: 1000: Remap 0x7efc05ddf000->0x7efdc071d000 len 0x6000
+[ff.run] (43.068s) criu> (42.562164) pie: 1000: Remap 0x7efc05ddd000->0x7efdc071b000 len 0x2000
+[ff.run] (43.068s) criu> (42.562178) pie: 1000: vdso: Runtime vdso/vvar matches dumpee, remap inplace
+[ff.run] (43.068s) criu> (42.562201) pie: 1000: vdso: Using gettimeofday() on vdso at 0x7ffe6b1f2c50
+[ff.run] (43.068s) criu> (42.562243) pie: 1000: Failed to set /proc/self/exe link (ret=-1), proceeding anyways
+[ff.run] (43.068s) criu> (42.562247) pie: 1000: Restoring scheduler params 0.0.0
+[ff.run] (43.068s) criu> (42.562259) pie: 1000: 1000: Restored
+1692853057232346 Counter: 11
+[ff.run] (43.070s) criu> (42.569116) Restore finished successfully. Tasks resumed.
+[ff.run] (43.070s) criu> (42.569128) Writing stats
+Displaying restore stats:
+Pages compared: 0 (0x0)
+Pages skipped COW: 0 (0x0)
+Pages restored: 65657 (0x10079)
+Restore time: 42555496 us
+Forking time: 42278212 us
+1692853057233484 Counter: 11
+[ff.run] (43.072s) criu> (42.570064) Dismissing the image streamer
+[ff.run] (43.072s) Application is ready, restore took 43.1s
+1692853058232662 Counter: 12
+1692853058233801 Counter: 12
+1692853059232875 Counter: 13
+1692853059234968 Counter: 13
+1692853060232978 Counter: 14
+1692853060235073 Counter: 14
+1692853061233118 Counter: 15
+1692853061235181 Counter: 15
+1692853062233336 Counter: 16
+1692853062235436 Counter: 16
+1692853063233607 Counter: 17
+1692853063235566 Counter: 17
+1692853064233853 Counter: 18
+1692853064235662 Counter: 18
+1692853065233958 Counter: 19
+1692853065235753 Counter: 19
+1692853066234213 Counter: 20
+1692853066235877 Counter: 20
+1692853067234465 Counter: 21
+1692853067236164 Counter: 21
+1692853068234723 Counter: 22
+1692853068236294 Counter: 22
+1692853069234874 Counter: 23
+1692853069236420 Counter: 23
+1692853070235184 Counter: 24
+1692853070236497 Counter: 24
+1692853071235440 Counter: 25
+1692853071236645 Counter: 25
+1692853072235728 Counter: 26
+1692853072236781 Counter: 26
+1692853073236067 Counter: 27
+1692853073236966 Counter: 27
+1692853074236436 Counter: 28
+1692853074237261 Counter: 28
+1692853075236621 Counter: 29
+1692853075237700 Counter: 29
+1692853076236873 Counter: 30
+1692853076237814 Counter: 30
+1692853077237138 Counter: 31
+1692853077237857 Counter: 31
+1692853078237310 Counter: 32
+1692853078237942 Counter: 32
+1692853079237676 Counter: 33
+1692853079238157 Counter: 33
+1692853080238021 Counter: 34
+1692853080238704 Counter: 34
+1692853081238193 Counter: 35
+1692853081238805 Counter: 35
+^C[ff.run] (67.863s) Exiting with exit_code=130: Application caught fatal signal SIGINT

@@ -1414,7 +1414,7 @@ static inline int fork_with_pid(struct pstree_item *item)
 	bool external_pidns = false;
 	int ret = -1;
 	pid_t pid = vpid(item);
-
+	pr_info("MYCOMMENT: Start fork_with_pid for pid %d\n",pid);
 	if (item->pid->state != TASK_HELPER) {
 		if (open_core(pid, &ca.core))
 			return -1;
@@ -1518,9 +1518,11 @@ static inline int fork_with_pid(struct pstree_item *item)
 	}
 
 	if (kdat.has_clone3_set_tid) {
+		pr_info("MYCOMMENT: From fork_with_pid call clone3w.., %d\n",pid);
 		ret = clone3_with_pid_noasan(restore_task_with_children, &ca,
 					     (ca.clone_flags & ~(CLONE_NEWNET | CLONE_NEWCGROUP | CLONE_NEWTIME)),
 					     SIGCHLD, pid);
+		pr_info("MYCOMMENT: From fork_with_pid finish clone3w., %d\n",pid);
 	} else {
 		/*
 		 * Some kernel modules, such as network packet generator
@@ -1535,8 +1537,10 @@ static inline int fork_with_pid(struct pstree_item *item)
 		 * move_in_cgroup(), so drop this flag here as well.
 		 */
 		close_pid_proc();
+		pr_info("MYCOMMENT: From fork with pid call clone_n.., %d\n",pid);
 		ret = clone_noasan(restore_task_with_children,
 				   (ca.clone_flags & ~(CLONE_NEWNET | CLONE_NEWCGROUP | CLONE_NEWTIME)) | SIGCHLD, &ca);
+		pr_info("MYCOMMENT: From fork with pid finish clone_n., %d with ret=%d\n",pid,ret);
 	}
 
 	if (ret < 0) {
@@ -1552,11 +1556,16 @@ static inline int fork_with_pid(struct pstree_item *item)
 	}
 
 err_unlock:
-	if (!(ca.clone_flags & CLONE_NEWPID))
+	if (!(ca.clone_flags & CLONE_NEWPID)){
+		pr_info("MYCOMMENT: From fork_with_pid Enter case !(ca.clone_flags & CLONE_NEWPID) for %d\n",pid);
 		unlock_last_pid();
+	}
 
-	if (ca.core)
+	if (ca.core){
+		pr_info("MYCOMMENT: From fork_with_pid Enter case ca.core=True, for %d\n",pid);
 		core_entry__free_unpacked(ca.core, NULL);
+	}
+	pr_info("MYCOMMENT: End fork_with_pid for %d\n",pid);
 	return ret;
 }
 
@@ -1850,7 +1859,8 @@ static int restore_task_with_children(void *_arg)
 	struct cr_clone_arg *ca = _arg;
 	pid_t pid;
 	int ret;
-
+	
+	pr_info("MYCOMMENT: Enter rtwc \n");
 	current = ca->item;
 
 	if (current != root_item) {
@@ -2000,7 +2010,7 @@ static int restore_task_with_children(void *_arg)
 		goto err;
 
 	restore_pgid();
-	pr_info("MYCOMMENT: Finish  restore_pgid() for pid %d\n",pid);
+	pr_info("MYCOMMENT:From rstwc Finish  restore_pgid() for pid %d\n",pid);
 
 	if (current->parent == NULL) {
 		/*
@@ -2011,22 +2021,22 @@ static int restore_task_with_children(void *_arg)
 		 *
 		 * It means that all tasks entered into their namespaces.
 		 */
-		pr_info("MYCOMMENT: current->parent = NULL for pid %d\n",pid);
+		pr_info("MYCOMMENT: From rstwc current->parent = NULL for pid %d\n",pid);
 		if (restore_wait_other_tasks())
 			goto err;
 		fini_restore_mntns();
 		__restore_switch_stage(CR_STATE_RESTORE);
 	} else {
-		pr_info("MYCOMMENT: Enter restore_finish_stage for pid %d\n",pid);
+		pr_info("MYCOMMENT: From rstwc Enter restore_finish_stage for pid %d\n",pid);
 		if (restore_finish_stage(task_entries, CR_STATE_FORKING) < 0)
 //			pr_info("MYCOMMENT: rfs < 0 for pid %d\n",pid);
 			goto err;
-		pr_info("MYCOMMENT: rfs >=0 for pid %d\n",pid);
+		pr_info("MYCOMMENT: From rstwc rfs >=0 for pid %d\n",pid);
 	}
 
 	if (restore_one_task(vpid(current), ca->core))
 		goto err;
-	pr_info("MYCOMMENT: end restore_task_with_children for pid %d \n", pid);
+	pr_info("MYCOMMENT: From rstwc end restore_task_with_children for pid %d \n", pid);
 	return 0;
 
 err:
