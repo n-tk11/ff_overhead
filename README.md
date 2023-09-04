@@ -19,6 +19,52 @@ Using ff with memhog can be run with command as follow
 ```
 sudo docker run  --env PROCESS=8  --rm -it   --user nobody   --cap-add=cap_sys_ptrace   --cap-add=cap_checkpoint_restore --security-opt systempaths=unconfined --security-opt apparmor=unconfined --name ff   --mount type=bind,source=/tmp,target=/tmp   ffmemhog:d12  fastfreeze run -vvv --image-url file:/tmp/ff-test --   /opt/memoryhog/entrypoint.sh
 ```
+## More secure way
+You can also create your custom apparmor profile to allow writing to /proc/sys/kernel/ns_last_pid while keep others secure.
+Following is an apparmor profile modified from docker-default
+```
+#include <tunables/global>
+
+profile docker_allow_checkpoint flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  network,
+  capability,
+  file,
+  umount,
+  # Host (privileged) processes may send signals to container processes.
+  signal (receive) peer=unconfined,
+  # dockerd may send signals to container processes (for "docker kill").
+  # signal (receive) peer={{.DaemonProfile}},
+  # Container processes may send signals amongst themselves.
+  signal (send,receive) peer=docker-default,
+
+  deny @{PROC}/* w,   # deny write for all files directly in /proc (not in a subdir)
+  # deny write to files not in /proc/<number>/** or /proc/sys/**
+  deny @{PROC}/{[^1-9],[^1-9][^0-9],[^1-9s][^0-9y][^0-9s],[^1-9][^0-9][^0-9][^0-9/]*}/** w,
+  deny @{PROC}/sys/[^k]** w,  # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
+  deny @{PROC}/sys/kernel/{?,??,[^n][^s]*} w,  # deny everything except shm* and ns*(ns_last_pid) in /proc/sys/kernel/
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/kcore rwklx,
+
+#@{PROC}/sys/kernel/ns_last_pid rw,
+
+  deny mount,
+
+  deny /sys/[^f]*/** wklx,
+  deny /sys/f[^s]*/** wklx,
+  deny /sys/fs/[^c]*/** wklx,
+  deny /sys/fs/c[^g]*/** wklx,
+  deny /sys/fs/cg[^r]*/** wklx,
+  deny /sys/firmware/** rwklx,
+  deny /sys/kernel/security/** rwklx,
+
+  # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container
+  ptrace (trace,read,tracedby,readby) peer=@{profile_name},
+}
+```
+Then load the profile and use it for your container (eg. --security-opt apparmor=docker_allow_checkpoint)
+For more information: https://docs.docker.com/engine/security/apparmor/
 
 
 ------------------------------
