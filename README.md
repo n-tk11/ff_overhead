@@ -43,7 +43,7 @@ profile docker_allow_checkpoint flags=(attach_disconnected,mediate_deleted) {
   # deny write to files not in /proc/<number>/** or /proc/sys/**
   deny @{PROC}/{[^1-9],[^1-9][^0-9],[^1-9s][^0-9y][^0-9s],[^1-9][^0-9][^0-9][^0-9/]*}/** w,
   deny @{PROC}/sys/[^k]** w,  # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
-  deny @{PROC}/sys/kernel/{?,??,[^n][^s]*} w,  # deny everything except shm* and ns*(ns_last_pid) in /proc/sys/kernel/
+  deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**}-@{PROC}/sys/kernel/ns_last_pid  w,  # deny everything except shm* and ns*(ns_last_pid) in /proc/sys/kernel/
   deny @{PROC}/sysrq-trigger rwklx,
   deny @{PROC}/kcore rwklx,
 
