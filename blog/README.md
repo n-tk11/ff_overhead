@@ -1,8 +1,9 @@
 Fastfreeze(FF) is a turn-key solution for containerized checkpoint and restore.FF uses CRIU as its core engine to do most of the jobs. It is easy to use through a simple CLI interface with very few commands and complications and is also non-privileged to provide a more secure way to do things.   
 But there there is a problem when using it to checkpoint applications with multiple processes, particularly the restore time.  
 Let's look at the restoration time of a checkpoint Memhog with 1-8 processes  
-![[Picture1.png]]
-Fastfreeze take so much time when there is more than 1 process. ~50x compare to 1 process and ~ 500x with 8 processes. These huge delays are obviously problematic for many use cases eg. Using FF in migration.  
+<img src="Picture1.png" width="200"> 
+
+Fastfreeze takes so much time when there is more than 1 process. ~50x compare to 1 process and ~ 500x with 8 processes. These huge delays are obviously problematic for many use cases eg. Using FF in migration.  
 
 Firstly, This is our setup doing all things further.  
 - Virtual Machine (managed with VirtualBox) Ubuntu 22.04
@@ -14,13 +15,14 @@ Firstly, This is our setup doing all things further.
 Let's investigate more where the cause resides in. First, we did it very simply: use the fastfreeze verbose option when restoring.  
 ```eg. fastfreeze checkpoint -vvv ```
 as it gives a lot of information including the timestamp.
-![[Pasted image 20230910230917.png]]
+<img src="Pasted image 20230910230917.png">
+
 We focused at the point where the restore process hang for about 40 s. 
 At fist glance, It looks like the hang was coming from when CRIU try to restore a process to a pgid. Is it??
 
 To be sure we added more debugging code into the CRIU source and built the whole FF again to get more problem understanding. We built like >20 versions of FF but here we will  only show you some interesting ones.
+<img src="Pasted image 20230910231713.png">
 
-![[Pasted image 20230910231713.png]]
 As we added more fine-grain debug messages, The hang happen ed after some process scheduling/synchronization, which is very weird. 
 Lets look at the point where the last line before hang print out.
 ```C
@@ -36,17 +38,18 @@ To be said, at the point of delay , The process 1002 just sleep!!
 What about another process?
 
 Before we go further, This is a summarized diagram of how FF restores 2 processes Memhog. Note here that the pid will always be the same through out the investigation as FF set root_pid with a constant number(default 1000).
-![[Pasted image 20230910233602.png]]
+<img src="Pasted image 20230910233602.png" width=70%>
+
 As you can see here Memhog processes(1001,1002) should be restored concurrently(as seen in the code login). 
 
 From the above knowledge,we assumed that the problem may not come from the process that active before the hang(1002) but because another child process(1001) stuck somewhere and not do any work even its sibling sleep! 
 
 Let's look at the next logs from another source modification. 
-![[Pasted image 20230910234839.png]]
+<img src="Pasted image 20230910234839.png">
 Mainly, we took a broader look this time.  From here we saw that the restore procedure continued at the point where a step relating to a function call far before our hang happened ended and it was also related to another sibling process(1001) restoration as we assumed.
 
 As we saw that the hang might related to "set_next_pid", we also added some debug messages to a Fastfreeze utility called "set_ns_last_pid".
-![[Pasted image 20230911000908.png]]
+<img src="Pasted image 20230911000908.png">
 Thats great! At this point, we guaranteed that the problem was from the set_ns_last_pid thing.
 
 The problem arises from a process called the fork_hack (or fork_bomb or process_spinning) which is a very simple but genius way that Fastfreeze used to control what the spawning process pID should be by frequently fork process and kill it till we get the desire PID.
@@ -83,10 +86,13 @@ deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**}-@{PROC}/sys/kernel/ns_last_pid  w,
 the ```-@{PROC}/sys/kernel/ns_last_pid``` will except our /proc/.../ns_last_pid in a rule that denies writing to /proc/sys/kernel files.
 
 Here the result
-![[Pasted image 20230911010948.png]]
+
+<img src="Pasted image 20230911010948.png" width=60%>
+
 Walah! We reduced the restore time from ~50s to ~1s that's a fantastic improvement! and as you can see no more set_next_pid hanging anymore! 
 Not only for 2 processes, we also tested with 8 processed and look at it.
-![[Pasted image 20230911011331.png]]
+<img src="Pasted image 20230911011331.png" width=60%>
+
 The delay decreased from ~500s to ~5s. That's 100 times improvement!! 
 
 For more detail about the solution and example running commands/codes, see: https://github.com/n-tk11/ff_overhead
